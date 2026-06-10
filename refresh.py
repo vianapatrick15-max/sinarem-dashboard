@@ -74,7 +74,7 @@ sh = gc.open_by_key(SID)
 
 # ---------- GERENCIADOR (2 frentes) ----------
 def read_front(title, front, camp_filter, ad_col):
-    """Le uma aba de gerenciador e devolve agregados + linhas por criativo."""
+    """Le uma aba de gerenciador e devolve agregados + diario por criativo."""
     g = sh.worksheet(title).get_all_values()
     gh = {h.strip(): i for i, h in enumerate(g[0])}
     C_DAY, C_CAMP = gh["Day"], gh["Campaign Name"]
@@ -84,7 +84,7 @@ def read_front(title, front, camp_filter, ad_col):
             and (not camp_filter or is_sinarem(r[C_CAMP]))]
     agg = {"front": front, "spend": 0.0, "impressions": 0.0, "clicks": 0.0, "lpv": 0.0}
     by_day = defaultdict(float)
-    by_ad = defaultdict(lambda: {"spend": 0.0, "clicks": 0.0, "lpv": 0.0})
+    by_day_ad = defaultdict(lambda: {"spend": 0.0, "clicks": 0.0, "lpv": 0.0})  # (day, ad)
     for r in rows:
         s = num(r[C_SPEND]) if len(r) > C_SPEND else 0
         agg["spend"] += s
@@ -93,13 +93,14 @@ def read_front(title, front, camp_filter, ad_col):
         agg["lpv"] += num(r[C_LPV]) if len(r) > C_LPV else 0
         by_day[r[C_DAY]] += s
         ad = r[C_AD] if len(r) > C_AD else ""
-        by_ad[ad]["spend"] += s
-        if len(r) > C_CLK: by_ad[ad]["clicks"] += num(r[C_CLK])
-        if len(r) > C_LPV: by_ad[ad]["lpv"] += num(r[C_LPV])
-    return agg, by_day, by_ad
+        m = by_day_ad[(r[C_DAY], ad)]
+        m["spend"] += s
+        if len(r) > C_CLK: m["clicks"] += num(r[C_CLK])
+        if len(r) > C_LPV: m["lpv"] += num(r[C_LPV])
+    return agg, by_day, by_day_ad
 
-aristo, aristo_day, aristo_ads = read_front("DADOS_GERENCIADOR", "Aristo", True, "Ad Name")
-medq, medq_day, medq_ads = read_front("DADOS_GERENCIADOR_MEDQ", "MedQ", False, "Ad Set Name")
+aristo, aristo_day, aristo_day_ads = read_front("DADOS_GERENCIADOR", "Aristo", True, "Ad Name")
+medq, medq_day, medq_day_ads = read_front("DADOS_GERENCIADOR_MEDQ", "MedQ", False, "Ad Set Name")
 
 spend = aristo["spend"] + medq["spend"]
 impr = aristo["impressions"] + medq["impressions"]
@@ -150,7 +151,7 @@ need_per_day = (TOTAL_TARGET - total_inscritos) / (days_left + 1) if days_left >
 budget_left = BUDGET - spend
 budget_per_day_needed = budget_left / (days_left + 1) if days_left >= 0 else 0
 
-# ---------- series acumuladas ----------
+# ---------- series acumuladas (spend tambem por frente, p/ filtro no front-end) ----------
 cum_leads = cum_spend = 0
 series = []
 for d in all_days:
@@ -160,22 +161,31 @@ for d in all_days:
         "day": d,
         "leads": leads_by_day.get(d, 0),
         "spend": round(spend_by_day.get(d, 0), 2),
+        "spend_aristo": round(aristo_day.get(d, 0), 2),
+        "spend_medq": round(medq_day.get(d, 0), 2),
         "cum_leads": cum_leads,
         "cum_spend": round(cum_spend, 2),
     })
 
-# ---------- por criativo (Aristo por ad, MedQ por conjunto) ----------
-ads = []
-for front, by_ad in (("Aristo", aristo_ads), ("MedQ", medq_ads)):
-    for ad, m in by_ad.items():
-        ads.append({
-            "front": front, "ad": ad,
+# ---------- diario por criativo (Aristo por ad, MedQ por conjunto) ----------
+ads_daily = []
+for front, by_day_ad in (("Aristo", aristo_day_ads), ("MedQ", medq_day_ads)):
+    for (day, ad), m in by_day_ad.items():
+        ads_daily.append({
+            "day": day, "front": front, "ad": ad,
             "spend": round(m["spend"], 2),
             "clicks": int(m["clicks"]),
             "lpv": int(m["lpv"]),
-            "cplpv": round(m["spend"] / m["lpv"], 2) if m["lpv"] else None,
         })
-ads.sort(key=lambda a: -a["spend"])
+ads_daily.sort(key=lambda a: (a["day"], -a["spend"]))
+
+# agregado total por criativo (p/ resumo no terminal)
+ads_tot = defaultdict(lambda: {"spend": 0.0, "clicks": 0, "lpv": 0})
+for a in ads_daily:
+    m = ads_tot[(a["front"], a["ad"])]
+    m["spend"] += a["spend"]; m["clicks"] += a["clicks"]; m["lpv"] += a["lpv"]
+ads = sorted(({"front": f, "ad": ad, **m} for (f, ad), m in ads_tot.items()),
+             key=lambda a: -a["spend"])
 
 perfil = sorted(({"label": p, "n": n, "pct": round(100 * n / total_inscritos, 1)}
                  for p, n in perfil_count.items()), key=lambda x: -x["n"])
@@ -225,7 +235,7 @@ data = {
         {"front": "MedQ", **{k: round(v, 2) if isinstance(v, float) else v
                              for k, v in medq.items() if k != "front"}},
     ],
-    "ads": ads,
+    "ads_daily": ads_daily,
     "perfil": perfil,
 }
 OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2))
@@ -246,5 +256,5 @@ print(f"PRECISA: {need_per_day:.1f} inscritos/dia p/ {TOTAL_TARGET} | budget/dia
 print(f"PROJECAO run-rate: {proj_total} inscritos | R$ {proj_spend:,.0f} gastos")
 print("\n-- por criativo/conjunto (spend desc) --")
 for a in ads:
-    print(f"  [{a['front']:<6}] {a['ad']:<38} R$ {a['spend']:>9,.0f} | {a['lpv']:>4} LPV | {a['clicks']:>4} cliques")
+    print(f"  [{a['front']:<6}] {a['ad']:<38} R$ {a['spend']:>9,.0f} | {a['lpv']:>4.0f} LPV | {a['clicks']:>4.0f} cliques")
 print(f"\nOK -> {OUT}")

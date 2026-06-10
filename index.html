@@ -16,13 +16,25 @@
     background:var(--bg);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
   header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
-    border-bottom:2px solid var(--navy);padding-bottom:16px;margin-bottom:22px}
+    border-bottom:2px solid var(--navy);padding-bottom:16px;margin-bottom:18px}
   .ttl .kick{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy2)}
   .ttl h1{font-size:27px;font-weight:800;color:var(--navy);letter-spacing:-.01em;margin-top:2px}
   .ttl .sub{font-size:13px;color:var(--muted);margin-top:3px}
   .count{text-align:right}
   .count .big{font-size:34px;font-weight:800;color:var(--navy);line-height:1}
   .count .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+  /* barra de filtros */
+  .controls{display:flex;flex-wrap:wrap;gap:18px;align-items:center;background:var(--card);
+    border:1px solid var(--line);border-radius:13px;padding:12px 16px;margin-bottom:20px}
+  .controls .clab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:20px;border:1px solid var(--line);
+    background:#f4f6f9;color:var(--muted);cursor:pointer;user-select:none;transition:all .12s}
+  .chip:hover{border-color:var(--accent2);color:var(--navy)}
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .dates{display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+  .dates input{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;color:var(--ink)}
+  .ctag{font-size:11.5px;color:var(--muted);margin-left:auto}
   .verdict{border-radius:14px;padding:18px 22px;margin-bottom:24px;display:flex;gap:16px;align-items:flex-start}
   .verdict .dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:5px}
   .verdict h2{font-size:18px;font-weight:800;margin-bottom:4px}
@@ -32,6 +44,7 @@
   .v-good{background:var(--good-bg);color:#0c5e3a}.v-good .dot{background:var(--good)}
   .seclab{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
     color:var(--muted);margin:26px 0 12px}
+  .seclab small{font-weight:600;letter-spacing:0;text-transform:none;color:var(--accent2)}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:780px){.grid{grid-template-columns:1fr 1fr}}
   @media(max-width:520px){.grid{grid-template-columns:1fr}}
@@ -61,6 +74,10 @@
   .chartbox h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
   .chartbox .hint{font-size:11.5px;color:var(--muted);margin-bottom:10px}
   .cw{position:relative;height:240px}
+  .tip{position:absolute;pointer-events:none;background:var(--navy);color:#fff;font-size:11.5px;
+    padding:7px 10px;border-radius:8px;line-height:1.5;white-space:nowrap;z-index:5;display:none;
+    box-shadow:0 4px 14px rgba(15,29,43,.25)}
+  .tip b{font-weight:700}
   .hbar{display:flex;align-items:center;gap:10px;padding:6px 0}
   .hbar .hlab{flex:0 0 290px;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .hbar .htrack{flex:1;height:14px;background:#eaeef2;border-radius:7px;overflow:hidden}
@@ -69,7 +86,10 @@
   .hbar .hnum{flex:0 0 110px;text-align:right;font-size:12.5px;font-weight:700}
   table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
   th,td{padding:11px 14px;text-align:right;font-size:13.5px;border-bottom:1px solid var(--line)}
-  th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+    cursor:pointer;user-select:none;white-space:nowrap}
+  th:hover{background:var(--navy2)}
+  th .arr{opacity:.6;font-size:10px;margin-left:4px}
   th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
   tbody tr:last-child td{border-bottom:0}
   tbody tr:hover{background:#f7f9fb}
@@ -101,15 +121,35 @@
     </div>
   </header>
 
+  <div class="controls">
+    <span class="clab">Período</span>
+    <div class="chips" id="chips-period">
+      <span class="chip on" data-p="all">Tudo</span>
+      <span class="chip" data-p="7">Últimos 7 dias</span>
+      <span class="chip" data-p="3">Últimos 3 dias</span>
+      <span class="chip" data-p="1">Hoje</span>
+    </div>
+    <div class="dates">
+      <input type="date" id="d-from"> até <input type="date" id="d-to">
+    </div>
+    <span class="clab" style="margin-left:6px">Frente</span>
+    <div class="chips" id="chips-front">
+      <span class="chip on" data-f="Todas">Todas</span>
+      <span class="chip" data-f="Aristo">Aristo</span>
+      <span class="chip" data-f="MedQ">MedQ</span>
+    </div>
+    <span class="ctag" id="ctag"></span>
+  </div>
+
   <div class="verdict" id="verdict">
     <div class="dot"></div>
     <div><h2 id="v-title"></h2><p id="v-text"></p></div>
   </div>
 
-  <div class="seclab">Como estamos vs a meta</div>
+  <div class="seclab">Como estamos vs a meta <small id="lab-kpis"></small></div>
   <div class="grid" id="kpis"></div>
 
-  <div class="seclab">Ritmo e projeção até o fim da captação (21/06)</div>
+  <div class="seclab">Ritmo e projeção até o fim da captação (21/06) <small id="lab-pace"></small></div>
   <div class="pace">
     <div class="panel">
       <h3>Ritmo de inscritos</h3>
@@ -124,27 +164,34 @@
   <div class="seclab">Evolução dos inscritos</div>
   <div class="charts">
     <div class="chartbox">
-      <h3>Inscritos — acumulado vs meta</h3>
+      <h3>Inscritos — acumulado vs meta <span style="font-weight:600;color:var(--accent2);font-size:11px">(sempre o período completo)</span></h3>
       <div class="hint" id="burnup-hint"></div>
-      <div class="cw" id="burnup"></div>
+      <div class="cw" id="burnup"><div class="tip" id="tip-b"></div></div>
     </div>
     <div class="chartbox">
       <h3>Inscritos e investimento por dia</h3>
-      <div class="hint">Barras = inscritos no dia · linha = investido no dia (duas frentes somadas).</div>
-      <div class="cw" id="daily"></div>
+      <div class="hint" id="daily-hint"></div>
+      <div class="cw" id="daily"><div class="tip" id="tip-d"></div></div>
     </div>
   </div>
 
-  <div class="seclab">Quem está se inscrevendo</div>
+  <div class="seclab">Quem está se inscrevendo <small>(todo o período — a base não tem perfil por dia)</small></div>
   <div class="panel" id="perfil"></div>
 
-  <div class="seclab">Investimento por anúncio / conjunto</div>
+  <div class="seclab">Investimento por anúncio / conjunto <small id="lab-ads"></small></div>
   <table id="ads-table">
-    <thead><tr><th>Frente</th><th>Anúncio / Conjunto</th><th>Investido</th><th>Cliques</th><th>Visitas à página</th><th>Custo por visita</th></tr></thead>
+    <thead><tr>
+      <th data-s="front">Frente<span class="arr"></span></th>
+      <th data-s="ad">Anúncio / Conjunto<span class="arr"></span></th>
+      <th data-s="spend">Investido<span class="arr">▼</span></th>
+      <th data-s="clicks">Cliques<span class="arr"></span></th>
+      <th data-s="lpv">Visitas à página<span class="arr"></span></th>
+      <th data-s="cplpv">Custo por visita<span class="arr"></span></th>
+    </tr></thead>
     <tbody></tbody>
   </table>
 
-  <div class="seclab">Resumo para a diretoria</div>
+  <div class="seclab">Resumo para a diretoria <small>(sempre o período completo)</small></div>
   <div id="actions"></div>
 
   <footer>
@@ -154,12 +201,13 @@
 </div>
 
 <script>
-const DATA = {"updated_at": "2026-06-10T12:00:00", "today": "2026-06-10", "event_start": "2026-06-19", "capture_end": "2026-06-21", "campaign_start": "2026-06-04", "days_left": 11, "days_to_event": 9, "targets": {"cpl": 20.0, "budget": 64000.0, "leads_pagos": 3200, "organico": 1400, "total": 4600}, "kpis": {"inscritos": 661, "publico_n": 576, "pct_publico": 87.1, "spend": 14984.67, "spend_aristo": 10453.86, "spend_medq": 4530.81, "impressions": 784323, "clicks": 2676, "lpv": 1753, "cpl_blended": 22.67, "cpc": 5.6, "cplpv": 8.55, "pct_budget_gasto": 23.4}, "pace": {"full_days": 6, "leads_per_day": 98.8, "spend_per_day": 2235.28, "need_per_day": 328.2, "budget_per_day_needed": 4084.61, "proj_total": 1847, "proj_spend": 41808.05, "on_track_leads": false, "on_track_cpl": false}, "series": [{"day": "2026-06-04", "leads": 4, "spend": 0.0, "cum_leads": 4, "cum_spend": 0.0}, {"day": "2026-06-05", "leads": 102, "spend": 1688.68, "cum_leads": 106, "cum_spend": 1688.68}, {"day": "2026-06-06", "leads": 127, "spend": 3581.16, "cum_leads": 233, "cum_spend": 5269.84}, {"day": "2026-06-07", "leads": 121, "spend": 3303.04, "cum_leads": 354, "cum_spend": 8572.88}, {"day": "2026-06-08", "leads": 89, "spend": 2348.39, "cum_leads": 443, "cum_spend": 10921.27}, {"day": "2026-06-09", "leads": 150, "spend": 2490.42, "cum_leads": 593, "cum_spend": 13411.69}, {"day": "2026-06-10", "leads": 68, "spend": 1572.98, "cum_leads": 661, "cum_spend": 14984.67}], "fronts": [{"front": "Aristo", "spend": 10453.86, "impressions": 345296.0, "clicks": 1528.0, "lpv": 1072.0}, {"front": "MedQ", "spend": 4530.81, "impressions": 439027.0, "clicks": 1148.0, "lpv": 681.0}], "ads": [{"front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 5199.77, "clicks": 863, "lpv": 616, "cplpv": 8.44}, {"front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 3392.44, "clicks": 474, "lpv": 329, "cplpv": 10.31}, {"front": "MedQ", "ad": "lal_alunos_medq", "spend": 2982.95, "clicks": 701, "lpv": 414, "cplpv": 7.21}, {"front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 1788.95, "clicks": 186, "lpv": 122, "cplpv": 14.66}, {"front": "MedQ", "ad": "publico_adv", "spend": 1547.86, "clicks": 447, "lpv": 267, "cplpv": 5.8}, {"front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 72.7, "clicks": 5, "lpv": 5, "cplpv": 14.54}], "perfil": [{"label": "Médico(a) em preparação para residência", "n": 301, "pct": 45.5}, {"label": "Estudante de Medicina (internato)", "n": 254, "pct": 38.4}, {"label": "Estudante de Medicina (1º ao 4º ano)", "n": 50, "pct": 7.6}, {"label": "Médico(a) recém-formado(a)", "n": 21, "pct": 3.2}, {"label": "Médico(a) em preparação para prova de título", "n": 10, "pct": 1.5}, {"label": "Ensino médio / pré-vestibular (interessado em Medicina)", "n": 6, "pct": 0.9}, {"label": "Outro", "n": 6, "pct": 0.9}, {"label": "Médico(a) residente", "n": 5, "pct": 0.8}, {"label": "Médico(a) em transição de carreira", "n": 5, "pct": 0.8}, {"label": "Médico(a) especialista", "n": 2, "pct": 0.3}, {"label": "Não informado", "n": 1, "pct": 0.2}]};
+const DATA = {"updated_at": "2026-06-10T12:00:00", "today": "2026-06-10", "event_start": "2026-06-19", "capture_end": "2026-06-21", "campaign_start": "2026-06-04", "days_left": 11, "days_to_event": 9, "targets": {"cpl": 20.0, "budget": 64000.0, "leads_pagos": 3200, "organico": 1400, "total": 4600}, "kpis": {"inscritos": 662, "publico_n": 577, "pct_publico": 87.2, "spend": 14984.67, "spend_aristo": 10453.86, "spend_medq": 4530.81, "impressions": 784323, "clicks": 2676, "lpv": 1753, "cpl_blended": 22.64, "cpc": 5.6, "cplpv": 8.55, "pct_budget_gasto": 23.4}, "pace": {"full_days": 6, "leads_per_day": 98.8, "spend_per_day": 2235.28, "need_per_day": 328.2, "budget_per_day_needed": 4084.61, "proj_total": 1848, "proj_spend": 41808.05, "on_track_leads": false, "on_track_cpl": false}, "series": [{"day": "2026-06-04", "leads": 4, "spend": 0.0, "spend_aristo": 0, "spend_medq": 0, "cum_leads": 4, "cum_spend": 0.0}, {"day": "2026-06-05", "leads": 102, "spend": 1688.68, "spend_aristo": 1329.81, "spend_medq": 358.87, "cum_leads": 106, "cum_spend": 1688.68}, {"day": "2026-06-06", "leads": 127, "spend": 3581.16, "spend_aristo": 2630.06, "spend_medq": 951.1, "cum_leads": 233, "cum_spend": 5269.84}, {"day": "2026-06-07", "leads": 121, "spend": 3303.04, "spend_aristo": 2527.83, "spend_medq": 775.21, "cum_leads": 354, "cum_spend": 8572.88}, {"day": "2026-06-08", "leads": 89, "spend": 2348.39, "spend_aristo": 1381.67, "spend_medq": 966.72, "cum_leads": 443, "cum_spend": 10921.27}, {"day": "2026-06-09", "leads": 150, "spend": 2490.42, "spend_aristo": 1745.98, "spend_medq": 744.44, "cum_leads": 593, "cum_spend": 13411.69}, {"day": "2026-06-10", "leads": 69, "spend": 1572.98, "spend_aristo": 838.51, "spend_medq": 734.47, "cum_leads": 662, "cum_spend": 14984.67}], "fronts": [{"front": "Aristo", "spend": 10453.86, "impressions": 345296.0, "clicks": 1528.0, "lpv": 1072.0}, {"front": "MedQ", "spend": 4530.81, "impressions": 439027.0, "clicks": 1148.0, "lpv": 681.0}], "ads_daily": [{"day": "2026-06-05", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 656.19, "clicks": 146, "lpv": 96}, {"day": "2026-06-05", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 508.56, "clicks": 91, "lpv": 59}, {"day": "2026-06-05", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 195.98, "clicks": 71, "lpv": 54}, {"day": "2026-06-05", "front": "MedQ", "ad": "publico_adv", "spend": 162.89, "clicks": 70, "lpv": 46}, {"day": "2026-06-05", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 150.16, "clicks": 24, "lpv": 19}, {"day": "2026-06-05", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 14.9, "clicks": 2, "lpv": 2}, {"day": "2026-06-06", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 1260.62, "clicks": 226, "lpv": 164}, {"day": "2026-06-06", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 960.98, "clicks": 163, "lpv": 117}, {"day": "2026-06-06", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 498.4, "clicks": 119, "lpv": 79}, {"day": "2026-06-06", "front": "MedQ", "ad": "publico_adv", "spend": 452.7, "clicks": 117, "lpv": 76}, {"day": "2026-06-06", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 390.14, "clicks": 49, "lpv": 27}, {"day": "2026-06-06", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 18.32, "clicks": 0, "lpv": 0}, {"day": "2026-06-07", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 1671.34, "clicks": 276, "lpv": 201}, {"day": "2026-06-07", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 582.14, "clicks": 85, "lpv": 65}, {"day": "2026-06-07", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 556.58, "clicks": 127, "lpv": 73}, {"day": "2026-06-07", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 268.56, "clicks": 36, "lpv": 30}, {"day": "2026-06-07", "front": "MedQ", "ad": "publico_adv", "spend": 218.63, "clicks": 51, "lpv": 26}, {"day": "2026-06-07", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 5.79, "clicks": 0, "lpv": 0}, {"day": "2026-06-08", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 786.61, "clicks": 114, "lpv": 83}, {"day": "2026-06-08", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 754.44, "clicks": 179, "lpv": 111}, {"day": "2026-06-08", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 367.65, "clicks": 50, "lpv": 36}, {"day": "2026-06-08", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 225.42, "clicks": 19, "lpv": 9}, {"day": "2026-06-08", "front": "MedQ", "ad": "publico_adv", "spend": 212.28, "clicks": 58, "lpv": 38}, {"day": "2026-06-08", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 1.99, "clicks": 0, "lpv": 0}, {"day": "2026-06-09", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 720.41, "clicks": 69, "lpv": 45}, {"day": "2026-06-09", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 519.72, "clicks": 41, "lpv": 28}, {"day": "2026-06-09", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 515.6, "clicks": 112, "lpv": 50}, {"day": "2026-06-09", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 495.1, "clicks": 63, "lpv": 46}, {"day": "2026-06-09", "front": "MedQ", "ad": "publico_adv", "spend": 228.84, "clicks": 68, "lpv": 36}, {"day": "2026-06-09", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 10.75, "clicks": 0, "lpv": 0}, {"day": "2026-06-10", "front": "MedQ", "ad": "lal_alunos_medq", "spend": 461.95, "clicks": 93, "lpv": 47}, {"day": "2026-06-10", "front": "Aristo", "ad": "ad02_img_coloqueaprova", "spend": 329.91, "clicks": 38, "lpv": 26}, {"day": "2026-06-10", "front": "MedQ", "ad": "publico_adv", "spend": 272.52, "clicks": 83, "lpv": 45}, {"day": "2026-06-10", "front": "Aristo", "ad": "ad01_img_oficial2026", "spend": 252.7, "clicks": 16, "lpv": 7}, {"day": "2026-06-10", "front": "Aristo", "ad": "ad03_car_datamarcada", "spend": 234.95, "clicks": 17, "lpv": 9}, {"day": "2026-06-10", "front": "Aristo", "ad": "ad04_car_porqueparticipar", "spend": 20.95, "clicks": 3, "lpv": 3}], "perfil": [{"label": "Médico(a) em preparação para residência", "n": 301, "pct": 45.5}, {"label": "Estudante de Medicina (internato)", "n": 255, "pct": 38.5}, {"label": "Estudante de Medicina (1º ao 4º ano)", "n": 50, "pct": 7.6}, {"label": "Médico(a) recém-formado(a)", "n": 21, "pct": 3.2}, {"label": "Médico(a) em preparação para prova de título", "n": 10, "pct": 1.5}, {"label": "Ensino médio / pré-vestibular (interessado em Medicina)", "n": 6, "pct": 0.9}, {"label": "Outro", "n": 6, "pct": 0.9}, {"label": "Médico(a) residente", "n": 5, "pct": 0.8}, {"label": "Médico(a) em transição de carreira", "n": 5, "pct": 0.8}, {"label": "Médico(a) especialista", "n": 2, "pct": 0.3}, {"label": "Não informado", "n": 1, "pct": 0.2}]};
 const BRL = n => "R$ " + Math.round(n||0).toLocaleString("pt-BR");
 const BRL2 = n => "R$ " + (n||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
 const NUM = n => (n||0).toLocaleString("pt-BR");
 const fmtDay = d => { const [y,m,dd]=d.split("-"); return dd+"/"+m; };
-const k = DATA.kpis, p = DATA.pace, t = DATA.targets;
+const t = DATA.targets, S = DATA.series;
+const FIRST = S[0].day, LAST = S[S.length-1].day;
 
 // nomes legíveis dos anúncios/conjuntos (sem código interno)
 function adLabel(name){
@@ -175,7 +223,14 @@ function adLabel(name){
   return (name||"—").replace(/^ad\d+_(img|vid|car)_/,'').replace(/_/g,' ');
 }
 
-// header
+// ---------- estado dos filtros ----------
+const state = { from: FIRST, to: LAST, front: "Todas", sort: {key:"spend", dir:-1} };
+const spendOf = d => state.front==="Todas" ? d.spend : (state.front==="Aristo" ? d.spend_aristo : d.spend_medq);
+const inRange = day => day >= state.from && day <= state.to;
+const isFull = () => state.from===FIRST && state.to===LAST && state.front==="Todas";
+const isFullPeriod = () => state.from===FIRST && state.to===LAST;
+
+// ---------- partes fixas (não dependem de filtro) ----------
 document.getElementById("sub").textContent =
   `Anúncios no ar desde ${fmtDay(DATA.campaign_start)} · Prova 19 a 21/06 (último início dom 17h) · dados de ${fmtDay(DATA.today)}`;
 document.getElementById("cd-days").textContent = DATA.days_to_event;
@@ -183,81 +238,93 @@ document.getElementById("ft-updated").textContent = "Atualizado em " + DATA.upda
 document.getElementById("burnup-hint").textContent =
   `A linha pontilhada mostra onde precisaríamos estar a cada dia para chegar a ${NUM(t.total)} inscritos até 21/06.`;
 
-// verdict
-const projGap = p.proj_total / t.total;
-let vcls, vtitle;
-if (p.proj_total >= t.total*0.95 && k.cpl_blended <= t.cpl*1.05){
-  vcls="v-good"; vtitle="No caminho de bater a meta";
-} else if (p.proj_total >= t.total*0.7){
-  vcls="v-warn"; vtitle="Atenção: ritmo abaixo do necessário";
-} else {
-  vcls="v-bad"; vtitle="Abaixo do ritmo — meta em risco";
-}
-const accel = p.leads_per_day ? (p.need_per_day/p.leads_per_day) : 0;
-const vtext =
-  `No ritmo de hoje (${NUM(p.leads_per_day)} inscritos por dia), o simulado fecha com cerca de `
-  + `${NUM(p.proj_total)} inscritos — ${Math.round(projGap*100)}% da meta de ${NUM(t.total)} — `
-  + `usando ~${BRL(p.proj_spend)} dos ${BRL(t.budget)} previstos em mídia. `
-  + (p.need_per_day>0
-      ? `Para bater a meta seriam precisos ${NUM(p.need_per_day)} inscritos por dia`
-        + (accel>1.05 ? `, ${accel.toFixed(1)}x o ritmo atual. ` : `. `)
-      : `A meta de inscritos já foi atingida. `)
-  + `O custo por inscrito hoje é ${BRL2(k.cpl_blended)} — a referência é ${BRL(t.cpl)}.`;
-const vd = document.getElementById("verdict");
-vd.className = "verdict "+vcls;
-document.getElementById("v-title").textContent = vtitle;
-document.getElementById("v-text").textContent = vtext;
+const k0 = DATA.kpis, p0 = DATA.pace;
+const accel0 = p0.leads_per_day ? (p0.need_per_day/p0.leads_per_day) : 0;
+(function verdict(){
+  const projGap = p0.proj_total / t.total;
+  let vcls, vtitle;
+  if (p0.proj_total >= t.total*0.95 && k0.cpl_blended <= t.cpl*1.05){
+    vcls="v-good"; vtitle="No caminho de bater a meta";
+  } else if (p0.proj_total >= t.total*0.7){
+    vcls="v-warn"; vtitle="Atenção: ritmo abaixo do necessário";
+  } else {
+    vcls="v-bad"; vtitle="Abaixo do ritmo — meta em risco";
+  }
+  const vtext =
+    `No ritmo de hoje (${NUM(p0.leads_per_day)} inscritos por dia), o simulado fecha com cerca de `
+    + `${NUM(p0.proj_total)} inscritos — ${Math.round(projGap*100)}% da meta de ${NUM(t.total)} — `
+    + `usando ~${BRL(p0.proj_spend)} dos ${BRL(t.budget)} previstos em mídia. `
+    + (p0.need_per_day>0
+        ? `Para bater a meta seriam precisos ${NUM(p0.need_per_day)} inscritos por dia`
+          + (accel0>1.05 ? `, ${accel0.toFixed(1)}x o ritmo atual. ` : `. `)
+        : `A meta de inscritos já foi atingida. `)
+    + `O custo por inscrito hoje é ${BRL2(k0.cpl_blended)} — a referência é ${BRL(t.cpl)}.`;
+  const vd = document.getElementById("verdict");
+  vd.className = "verdict "+vcls;
+  document.getElementById("v-title").textContent = vtitle;
+  document.getElementById("v-text").textContent = vtext;
+})();
 
-// KPIs
-function pct(a,b){return Math.min(100, Math.round(100*a/b));}
-function colorFor(ratio,invert){
-  if(invert){ if(ratio<=1.0)return"good"; if(ratio<=1.1)return"warn"; return"bad";}
-  if(ratio>=0.95)return"good"; if(ratio>=0.6)return"warn"; return"bad";
-}
-const barc = {good:"var(--good)",warn:"var(--warn)",bad:"var(--bad)"};
-const shareAristo = Math.round(100*k.spend_aristo/k.spend);
-const kpis = [
-  {k:"Inscritos no simulado", v:NUM(k.inscritos), small:"de "+NUM(t.total), p:pct(k.inscritos,t.total), c:colorFor(k.inscritos/t.total), meta:pct(k.inscritos,t.total)+"% da meta de "+NUM(t.total)+" inscritos"},
-  {k:"Investido em anúncios", v:BRL(k.spend), small:"de "+BRL(t.budget), p:pct(k.spend,t.budget), c:k.pct_budget_gasto<40?"bad":(k.pct_budget_gasto<70?"warn":"good"), meta:k.pct_budget_gasto+"% da verba usada · "+DATA.days_left+" dias de captação restantes"},
-  {k:"Custo por inscrito", v:BRL2(k.cpl_blended), small:"ref. "+BRL(t.cpl), p:Math.min(100,Math.round(100*t.cpl/(k.cpl_blended||1))), c:colorFor((k.cpl_blended||0)/t.cpl,true), meta:(k.cpl_blended>t.cpl?Math.round(100*(k.cpl_blended/t.cpl-1))+"% acima da referência":"dentro da referência")+" · verba total ÷ inscritos totais"},
-  {k:"Frente Aristo", v:BRL(k.spend_aristo), small:shareAristo+"% da mídia", p:shareAristo, c:"good", meta:NUM(DATA.fronts[0].lpv)+" visitas à página · "+NUM(DATA.fronts[0].clicks)+" cliques"},
-  {k:"Frente MedQ", v:BRL(k.spend_medq), small:(100-shareAristo)+"% da mídia", p:100-shareAristo, c:"good", meta:NUM(DATA.fronts[1].lpv)+" visitas à página · "+NUM(DATA.fronts[1].clicks)+" cliques"},
-  {k:"Público certo", v:k.pct_publico+"%", small:NUM(k.publico_n)+" de "+NUM(k.inscritos), p:Math.round(k.pct_publico), c:k.pct_publico>=80?"good":(k.pct_publico>=60?"warn":"bad"), meta:"em preparação para residência (inclui internato)"},
-];
-document.getElementById("kpis").innerHTML = kpis.map(c=>`
-  <div class="card">
-    <div class="k">${c.k}</div>
-    <div class="v">${c.v} <small>${c.small||""}</small> <span class="pill ${c.c}">${c.p}%</span></div>
-    <div class="meta">${c.meta}</div>
-    <div class="bar"><i style="width:${c.p}%;background:${barc[c.c]}"></i></div>
+// quebra por perfil (global — a base não tem perfil por dia)
+const pmax = Math.max(...DATA.perfil.map(x=>x.n));
+document.getElementById("perfil").innerHTML = DATA.perfil.slice(0,8).map((x,i)=>`
+  <div class="hbar ${i>2?'dim':''}">
+    <span class="hlab" title="${x.label}">${x.label}</span>
+    <span class="htrack"><i style="width:${Math.round(100*x.n/pmax)}%"></i></span>
+    <span class="hnum">${NUM(x.n)} · ${x.pct}%</span>
   </div>`).join("");
 
-// pace
-function rate(lab,num,cls){return `<div class="rate"><span class="lab">${lab}</span><span class="num ${cls||''}">${num}</span></div>`;}
-document.getElementById("pace-leads").innerHTML =
-  rate("Entrando por dia (média)", NUM(p.leads_per_day)+" inscritos")
- +rate("Precisaria entrar por dia", NUM(p.need_per_day)+" inscritos", p.need_per_day>p.leads_per_day?"bad":"good")
- +(accel>1.05 ? rate("Quanto precisa acelerar", accel.toFixed(1)+"x", "bad") : "")
- +rate("Projeção no ritmo de hoje", NUM(p.proj_total)+" inscritos", p.proj_total>=t.total*0.95?"good":(p.proj_total>=t.total*0.7?"warn":"bad"))
- +rate("Custo por visita à página", BRL2(k.cplpv));
-document.getElementById("pace-budget").innerHTML =
-  rate("Investido por dia (média)", BRL(p.spend_per_day))
- +rate("Precisaria investir por dia", BRL(p.budget_per_day_needed), p.budget_per_day_needed>p.spend_per_day*1.1?"warn":"good")
- +rate("Verba ainda disponível", BRL(t.budget-k.spend))
- +rate("Projeção de gasto até 21/06", BRL(p.proj_spend), p.proj_spend>=t.budget*0.9?"good":"bad")
- +rate("Sobraria sem uso", BRL(Math.max(0,t.budget-p.proj_spend)), Math.max(0,t.budget-p.proj_spend)>t.budget*0.15?"bad":"good");
+// resumo diretoria (sempre dados completos)
+(function actions(){
+  const sobra = Math.max(0,t.budget-p0.proj_spend);
+  const tot = {};
+  DATA.ads_daily.forEach(a=>{
+    const kk=a.front+"|"+a.ad;
+    tot[kk]=tot[kk]||{front:a.front,ad:a.ad,spend:0,lpv:0};
+    tot[kk].spend+=a.spend; tot[kk].lpv+=a.lpv;
+  });
+  const best = Object.values(tot).filter(a=>a.lpv>0).map(a=>({...a,cplpv:a.spend/a.lpv}))
+    .sort((a,b)=>a.cplpv-b.cplpv)[0];
+  const notes=[];
+  notes.push(`<div class="note">
+    <h4>Onde estamos</h4>
+    <ul>
+      <li>Em ${p0.full_days} dias de captação temos <b>${NUM(k0.inscritos)} inscritos</b> (${Math.round(100*k0.inscritos/t.total)}% da meta de ${NUM(t.total)}), com <b>${k0.pct_publico}% do público certo</b> — gente em preparação para residência.</li>
+      <li>Já investimos <b>${BRL(k0.spend)}</b> (${k0.pct_budget_gasto}% da verba): ${BRL(k0.spend_aristo)} pela frente Aristo e ${BRL(k0.spend_medq)} pela MedQ. O custo por inscrito está em <b>${BRL2(k0.cpl_blended)}</b> (referência ${BRL(t.cpl)}).</li>
+    </ul>
+  </div>`);
+  if (p0.proj_total < t.total*0.95 || sobra > t.budget*0.15){
+    notes.push(`<div class="note flag">
+      <h4>O que precisa de atenção</h4>
+      <ul>
+        ${p0.proj_total < t.total*0.95 ? `<li>No ritmo atual (${NUM(p0.leads_per_day)}/dia) chegamos a ~<b>${NUM(p0.proj_total)} inscritos</b> em 21/06. Para bater ${NUM(t.total)} precisamos de <b>${NUM(p0.need_per_day)}/dia</b>${accel0>1.05?` — ${accel0.toFixed(1)}x o ritmo de hoje`:``}.</li>` : ``}
+        ${sobra > t.budget*0.15 ? `<li>Estamos investindo ${BRL(p0.spend_per_day)}/dia, mas para usar toda a verba até 21/06 seriam ${BRL(p0.budget_per_day_needed)}/dia — no ritmo atual sobram ~<b>${BRL(sobra)}</b> sem uso.</li>` : ``}
+      </ul>
+    </div>`);
+  }
+  notes.push(`<div class="note">
+    <h4>Próximos passos</h4>
+    <ul>
+      ${p0.budget_per_day_needed > p0.spend_per_day*1.1 ? `<li><b>Acelerar o investimento diário</b> nas duas frentes — a reta final (semana da prova) é quando a captação mais converte.</li>` : `<li><b>Manter o ritmo de investimento</b> e monitorar o custo por inscrito na reta final.</li>`}
+      ${best ? `<li><b>Priorizar o criativo mais eficiente</b> em tráfego ("${adLabel(best.ad)}", ${BRL2(best.cplpv)} por visita) na hora de escalar.</li>` : ``}
+      <li><b>Reforçar os canais próprios</b> (e-mail, redes, base de alunos) nos últimos dias — boa parte dos inscritos chega por eles.</li>
+    </ul>
+  </div>`);
+  document.getElementById("actions").innerHTML = notes.join("");
+})();
 
-// gráficos em SVG nativo — sem biblioteca externa, 100% offline
+// burnup é sempre o período completo (acumulado vs meta) + tooltip
 const compact = v => v>=1000 ? (v/1000).toFixed(1).replace(".0","")+"k" : Math.round(v);
-
-function svgBurnup(){
+let burnupXs = [];
+(function svgBurnup(){
   const W=640,H=240,L=46,R=16,T=24,B=28, iw=W-L-R, ih=H-T-B;
-  const s=DATA.series, n=s.length, cum=s.map(x=>x.cum_leads);
+  const s=S, n=s.length, cum=s.map(x=>x.cum_leads);
   const start=new Date(DATA.campaign_start), end=new Date(DATA.capture_end);
   const td=(end-start)/86400000 || 1;
   const meta=s.map(x=>Math.round(t.total*((new Date(x.day)-start)/86400000+1)/(td+1)));
   const ymax=Math.max(10,...cum,...meta)*1.15;
   const X=i=> L+(n<=1?iw/2:iw*i/(n-1)), Y=v=> T+ih-ih*v/ymax, base=T+ih;
+  burnupXs = s.map((x,i)=>({x:X(i)/W, day:x.day, cum:cum[i], meta:meta[i], leads:x.leads}));
   let g="";
   for(let i=0;i<=4;i++){const v=ymax*i/4,yy=Y(v);
     g+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#eef1f4"/>`;
@@ -273,15 +340,112 @@ function svgBurnup(){
   g+=`<text x="${X(n-1)}" y="${Y(cum[n-1])-9}" text-anchor="middle" font-size="11" font-weight="700" fill="#143250">${NUM(cum[n-1])}</text>`;
   g+=`<rect x="${L}" y="6" width="11" height="3" fill="#143250"/><text x="${L+15}" y="9" font-size="10" fill="#6b7c8f">Inscritos reais</text>`;
   g+=`<rect x="${L+108}" y="6" width="11" height="3" fill="#d6453d"/><text x="${L+123}" y="9" font-size="10" fill="#6b7c8f">Onde deveríamos estar</text>`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`;
+  document.getElementById("burnup").insertAdjacentHTML("afterbegin",
+    `<svg id="burnup-svg" viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`);
+})();
+
+// tooltip do burnup (ponto mais próximo do mouse)
+(function(){
+  const box=document.getElementById("burnup"), tip=document.getElementById("tip-b");
+  box.addEventListener("mousemove",e=>{
+    const r=box.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width;
+    let bi=0,bd=9;
+    burnupXs.forEach((pt,i)=>{const d=Math.abs(pt.x-fx); if(d<bd){bd=d;bi=i;}});
+    const pt=burnupXs[bi];
+    tip.innerHTML=`<b>${fmtDay(pt.day)}</b><br>Acumulado: <b>${NUM(pt.cum)}</b> inscritos<br>No dia: ${NUM(pt.leads)}<br>Meta do dia: ${NUM(pt.meta)}`;
+    tip.style.display="block";
+    const tx=Math.min(Math.max(e.clientX-r.left+14,0), r.width-tip.offsetWidth-4);
+    tip.style.left=tx+"px"; tip.style.top=Math.max(0,e.clientY-r.top-58)+"px";
+  });
+  box.addEventListener("mouseleave",()=>tip.style.display="none");
+})();
+
+// ---------- render dependente de filtros ----------
+function pct(a,b){return Math.min(100, Math.round(100*a/b));}
+function colorFor(ratio,invert){
+  if(invert){ if(ratio<=1.0)return"good"; if(ratio<=1.1)return"warn"; return"bad";}
+  if(ratio>=0.95)return"good"; if(ratio>=0.6)return"warn"; return"bad";
+}
+const barc = {good:"var(--good)",warn:"var(--warn)",bad:"var(--bad)"};
+let dailyXs = [];
+
+function render(){
+  const days = S.filter(d=>inRange(d.day));
+  const lbl = isFullPeriod() && state.front==="Todas" ? "" :
+    `(${state.front!=="Todas"?"frente "+state.front+" · ":""}${fmtDay(state.from)} a ${fmtDay(state.to)})`;
+  document.getElementById("lab-kpis").textContent = lbl;
+  document.getElementById("lab-pace").textContent = isFullPeriod()? "" : `(ritmo calculado no período selecionado)`;
+  document.getElementById("lab-ads").textContent = lbl;
+  document.getElementById("ctag").textContent =
+    `${days.length} dia${days.length>1?"s":""} selecionado${days.length>1?"s":""}`;
+
+  // agregados do período
+  const leads = days.reduce((a,d)=>a+d.leads,0);
+  const spend = days.reduce((a,d)=>a+spendOf(d),0);
+  const spendA = days.reduce((a,d)=>a+d.spend_aristo,0);
+  const spendM = days.reduce((a,d)=>a+d.spend_medq,0);
+  const adsP = DATA.ads_daily.filter(a=>inRange(a.day) && (state.front==="Todas"||a.front===state.front));
+  const clicks = adsP.reduce((a,x)=>a+x.clicks,0), lpv = adsP.reduce((a,x)=>a+x.lpv,0);
+  const cpl = leads? spend/leads : 0;
+  const blended = state.front==="Todas";
+
+  // KPIs
+  const shareA = (spendA+spendM)? Math.round(100*spendA/(spendA+spendM)) : 0;
+  const kpis = [
+    {k:"Inscritos no simulado", v:NUM(leads), small:isFullPeriod()?"de "+NUM(t.total):"no período", p:pct(leads,t.total), c:isFullPeriod()?colorFor(leads/t.total):"good", meta:pct(leads,t.total)+"% da meta de "+NUM(t.total)+" inscritos"+(isFullPeriod()?"":" (período)")},
+    {k:"Investido em anúncios"+(blended?"":" — "+state.front), v:BRL(spend), small:isFullPeriod()&&blended?"de "+BRL(t.budget):"no período", p:pct(spend,t.budget), c:(isFullPeriod()&&blended)?(k0.pct_budget_gasto<40?"bad":(k0.pct_budget_gasto<70?"warn":"good")):"good", meta:(isFullPeriod()&&blended? k0.pct_budget_gasto+"% da verba usada · "+DATA.days_left+" dias de captação restantes" : Math.round(100*spend/t.budget)+"% da verba total")},
+    {k:"Custo por inscrito", v:blended?BRL2(cpl):"—", small:blended?"ref. "+BRL(t.cpl):"", p:blended?Math.min(100,Math.round(100*t.cpl/(cpl||1))):0, c:blended?colorFor((cpl||0)/t.cpl,true):"warn", meta:blended?((cpl>t.cpl?Math.round(100*(cpl/t.cpl-1))+"% acima da referência":"dentro da referência")+" · verba ÷ inscritos do período"):"só faz sentido com as duas frentes (leads não têm frente)"},
+    {k:"Frente Aristo", v:BRL(spendA), small:shareA+"% da mídia", p:shareA, c:"good", meta:"investimento no período"},
+    {k:"Frente MedQ", v:BRL(spendM), small:(100-shareA)+"% da mídia", p:100-shareA, c:"good", meta:"investimento no período"},
+    {k:"Público certo", v:k0.pct_publico+"%", small:NUM(k0.publico_n)+" de "+NUM(k0.inscritos), p:Math.round(k0.pct_publico), c:k0.pct_publico>=80?"good":(k0.pct_publico>=60?"warn":"bad"), meta:"em preparação para residência (todo o período)"},
+  ];
+  document.getElementById("kpis").innerHTML = kpis.map(c=>`
+    <div class="card">
+      <div class="k">${c.k}</div>
+      <div class="v">${c.v} <small>${c.small||""}</small> ${c.p?`<span class="pill ${c.c}">${c.p}%</span>`:""}</div>
+      <div class="meta">${c.meta}</div>
+      <div class="bar"><i style="width:${c.p}%;background:${barc[c.c]}"></i></div>
+    </div>`).join("");
+
+  // pace — ritmo do período selecionado, projeção até 21/06
+  const fullDays = days.filter(d=>d.day < DATA.today);
+  const nf = Math.max(fullDays.length,1);
+  const lpd = fullDays.reduce((a,d)=>a+d.leads,0)/nf;
+  const spd = fullDays.reduce((a,d)=>a+spendOf(d),0)/nf;
+  const totalNow = k0.inscritos, spendNow = k0.spend;
+  const proj = Math.round(totalNow + lpd*(DATA.days_left+1));
+  const projSp = spendNow + (state.front==="Todas"?spd:p0.spend_per_day)*(DATA.days_left+1);
+  const need = Math.max(0,(t.total-totalNow)/(DATA.days_left+1));
+  const acc = lpd? need/lpd : 0;
+  const cplpv = lpv? spend/lpv : 0;
+  function rate(lab,num,cls){return `<div class="rate"><span class="lab">${lab}</span><span class="num ${cls||''}">${num}</span></div>`;}
+  document.getElementById("pace-leads").innerHTML =
+    rate("Entrando por dia (média do período)", NUM(Math.round(lpd*10)/10)+" inscritos")
+   +rate("Precisaria entrar por dia", NUM(Math.round(need*10)/10)+" inscritos", need>lpd?"bad":"good")
+   +(acc>1.05 ? rate("Quanto precisa acelerar", acc.toFixed(1)+"x", "bad") : "")
+   +rate("Projeção nesse ritmo", NUM(proj)+" inscritos", proj>=t.total*0.95?"good":(proj>=t.total*0.7?"warn":"bad"))
+   +rate("Custo por visita à página"+(blended?"":" ("+state.front+")"), BRL2(cplpv));
+  document.getElementById("pace-budget").innerHTML =
+    rate("Investido por dia (média"+(blended?"":" "+state.front)+")", BRL(spd))
+   +rate("Precisaria investir por dia", BRL(p0.budget_per_day_needed), p0.budget_per_day_needed>p0.spend_per_day*1.1?"warn":"good")
+   +rate("Verba ainda disponível", BRL(t.budget-spendNow))
+   +rate("Projeção de gasto até 21/06", BRL(projSp), projSp>=t.budget*0.9?"good":"bad")
+   +rate("Sobraria sem uso", BRL(Math.max(0,t.budget-projSp)), Math.max(0,t.budget-projSp)>t.budget*0.15?"bad":"good");
+
+  renderDaily(days);
+  renderTable(adsP);
 }
 
-function svgDaily(){
+function renderDaily(days){
+  const lblF = state.front==="Todas" ? "duas frentes somadas" : "frente "+state.front;
+  document.getElementById("daily-hint").textContent =
+    `Barras = inscritos no dia · linha = investido no dia (${lblF}).`;
   const W=440,H=240,L=34,R=38,T=26,B=28, iw=W-L-R, ih=H-T-B;
-  const s=DATA.series,n=s.length, leads=s.map(x=>x.leads), spend=s.map(x=>x.spend);
+  const s=days,n=s.length, leads=s.map(x=>x.leads), spend=s.map(x=>spendOf(x));
   const ymaxL=Math.max(1,...leads)*1.35, ymaxR=Math.max(1,...spend)*1.3;
   const bw=Math.min(34, iw/n*0.5), cx=i=> L+iw*(i+0.5)/n;
   const YL=v=> T+ih-ih*v/ymaxL, YR=v=> T+ih-ih*v/ymaxR, base=T+ih;
+  dailyXs = s.map((x,i)=>({x:cx(i)/W, day:x.day, leads:leads[i], spend:spend[i]}));
   let g="";
   for(let i=0;i<=3;i++){const v=ymaxL*i/3,yy=YL(v);
     g+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#eef1f4"/>`;
@@ -297,61 +461,100 @@ function svgDaily(){
   for(let i=0;i<=3;i++){const v=ymaxR*i/3;g+=`<text x="${W-R+5}" y="${YR(v)+3}" text-anchor="start" font-size="9" fill="#d98a1f">${compact(v)}</text>`;}
   g+=`<rect x="${L}" y="6" width="11" height="9" fill="#2a7de1"/><text x="${L+15}" y="13" font-size="10" fill="#6b7c8f">Inscritos</text>`;
   g+=`<rect x="${L+78}" y="9" width="11" height="3" fill="#d98a1f"/><text x="${L+93}" y="13" font-size="10" fill="#6b7c8f">R$ investido</text>`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`;
+  const box=document.getElementById("daily");
+  const old=box.querySelector("svg"); if(old) old.remove();
+  box.insertAdjacentHTML("afterbegin",
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`);
 }
-document.getElementById("burnup").innerHTML = svgBurnup();
-document.getElementById("daily").innerHTML = svgDaily();
+(function(){
+  const box=document.getElementById("daily"), tip=document.getElementById("tip-d");
+  box.addEventListener("mousemove",e=>{
+    if(!dailyXs.length) return;
+    const r=box.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width;
+    let bi=0,bd=9;
+    dailyXs.forEach((pt,i)=>{const d=Math.abs(pt.x-fx); if(d<bd){bd=d;bi=i;}});
+    const pt=dailyXs[bi];
+    tip.innerHTML=`<b>${fmtDay(pt.day)}</b><br>Inscritos: <b>${NUM(pt.leads)}</b><br>Investido: <b>${BRL2(pt.spend)}</b>`;
+    tip.style.display="block";
+    const tx=Math.min(Math.max(e.clientX-r.left+14,0), r.width-tip.offsetWidth-4);
+    tip.style.left=tx+"px"; tip.style.top=Math.max(0,e.clientY-r.top-52)+"px";
+  });
+  box.addEventListener("mouseleave",()=>tip.style.display="none");
+})();
 
-// quebra por perfil
-const pmax = Math.max(...DATA.perfil.map(x=>x.n));
-document.getElementById("perfil").innerHTML = DATA.perfil.slice(0,8).map((x,i)=>`
-  <div class="hbar ${i>2?'dim':''}">
-    <span class="hlab" title="${x.label}">${x.label}</span>
-    <span class="htrack"><i style="width:${Math.round(100*x.n/pmax)}%"></i></span>
-    <span class="hnum">${NUM(x.n)} · ${x.pct}%</span>
-  </div>`).join("");
-
-// tabela de anúncios/conjuntos
-const tb = document.querySelector("#ads-table tbody");
-tb.innerHTML = DATA.ads.map(a=>`
-  <tr>
-    <td><span class="tag ${a.front.toLowerCase()}">${a.front}</span></td>
-    <td class="ad">${adLabel(a.ad)}</td>
-    <td>${BRL(a.spend)}</td>
-    <td>${NUM(a.clicks)}</td>
-    <td>${NUM(a.lpv)}</td>
-    <td>${a.cplpv?BRL2(a.cplpv):"—"}</td>
-  </tr>`).join("");
-
-// resumo diretoria (gerado a partir dos números do dia)
-const sobra = Math.max(0,t.budget-p.proj_spend);
-const best = DATA.ads.filter(a=>a.cplpv).sort((a,b)=>a.cplpv-b.cplpv)[0];
-const notes = [];
-notes.push(`<div class="note">
-  <h4>Onde estamos</h4>
-  <ul>
-    <li>Em ${p.full_days} dias de captação temos <b>${NUM(k.inscritos)} inscritos</b> (${pct(k.inscritos,t.total)}% da meta de ${NUM(t.total)}), com <b>${k.pct_publico}% do público certo</b> — gente em preparação para residência.</li>
-    <li>Já investimos <b>${BRL(k.spend)}</b> (${k.pct_budget_gasto}% da verba): ${BRL(k.spend_aristo)} pela frente Aristo e ${BRL(k.spend_medq)} pela MedQ. O custo por inscrito está em <b>${BRL2(k.cpl_blended)}</b> (referência ${BRL(t.cpl)}).</li>
-  </ul>
-</div>`);
-if (p.proj_total < t.total*0.95 || sobra > t.budget*0.15){
-  notes.push(`<div class="note flag">
-    <h4>O que precisa de atenção</h4>
-    <ul>
-      ${p.proj_total < t.total*0.95 ? `<li>No ritmo atual (${NUM(p.leads_per_day)}/dia) chegamos a ~<b>${NUM(p.proj_total)} inscritos</b> em 21/06. Para bater ${NUM(t.total)} precisamos de <b>${NUM(p.need_per_day)}/dia</b>${accel>1.05?` — ${accel.toFixed(1)}x o ritmo de hoje`:``}.</li>` : ``}
-      ${sobra > t.budget*0.15 ? `<li>Estamos investindo ${BRL(p.spend_per_day)}/dia, mas para usar toda a verba até 21/06 seriam ${BRL(p.budget_per_day_needed)}/dia — no ritmo atual sobram ~<b>${BRL(sobra)}</b> sem uso.</li>` : ``}
-    </ul>
-  </div>`);
+function renderTable(adsP){
+  const tot={};
+  adsP.forEach(a=>{
+    const kk=a.front+"|"+a.ad;
+    tot[kk]=tot[kk]||{front:a.front,ad:a.ad,spend:0,clicks:0,lpv:0};
+    tot[kk].spend+=a.spend; tot[kk].clicks+=a.clicks; tot[kk].lpv+=a.lpv;
+  });
+  let rows=Object.values(tot).map(a=>({...a, cplpv:a.lpv?a.spend/a.lpv:null}));
+  const {key,dir}=state.sort;
+  rows.sort((a,b)=>{
+    let va=a[key], vb=b[key];
+    if(va==null) return 1; if(vb==null) return -1;
+    if(typeof va==="string") return dir*va.localeCompare(vb);
+    return dir*(va-vb);
+  });
+  document.querySelector("#ads-table tbody").innerHTML = rows.map(a=>`
+    <tr>
+      <td><span class="tag ${a.front.toLowerCase()}">${a.front}</span></td>
+      <td class="ad" title="${a.ad}">${adLabel(a.ad)}</td>
+      <td>${BRL(a.spend)}</td>
+      <td>${NUM(a.clicks)}</td>
+      <td>${NUM(a.lpv)}</td>
+      <td>${a.cplpv?BRL2(a.cplpv):"—"}</td>
+    </tr>`).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--muted)">Sem dados no período</td></tr>`;
+  document.querySelectorAll("#ads-table th").forEach(th=>{
+    th.querySelector(".arr").textContent = th.dataset.s===key ? (dir<0?"▼":"▲") : "";
+  });
 }
-notes.push(`<div class="note">
-  <h4>Próximos passos</h4>
-  <ul>
-    ${p.budget_per_day_needed > p.spend_per_day*1.1 ? `<li><b>Acelerar o investimento diário</b> nas duas frentes — a reta final (semana da prova) é quando a captação mais converte.</li>` : `<li><b>Manter o ritmo de investimento</b> e monitorar o custo por inscrito na reta final.</li>`}
-    ${best ? `<li><b>Priorizar o criativo mais eficiente</b> em tráfego ("${adLabel(best.ad)}", ${BRL2(best.cplpv)} por visita) na hora de escalar.</li>` : ``}
-    <li><b>Reforçar os canais próprios</b> (e-mail, redes, base de alunos) nos últimos dias — boa parte dos inscritos chega por eles.</li>
-  </ul>
-</div>`);
-document.getElementById("actions").innerHTML = notes.join("");
+
+// ---------- listeners ----------
+const dFrom=document.getElementById("d-from"), dTo=document.getElementById("d-to");
+dFrom.min=dTo.min=FIRST; dFrom.max=dTo.max=LAST;
+dFrom.value=FIRST; dTo.value=LAST;
+function setPeriod(from,to,chip){
+  state.from=from; state.to=to;
+  dFrom.value=from; dTo.value=to;
+  document.querySelectorAll("#chips-period .chip").forEach(c=>c.classList.toggle("on",c===chip));
+  render();
+}
+document.querySelectorAll("#chips-period .chip").forEach(chip=>{
+  chip.addEventListener("click",()=>{
+    const p=chip.dataset.p;
+    if(p==="all") setPeriod(FIRST,LAST,chip);
+    else{
+      const idx=Math.max(0,S.length-parseInt(p));
+      setPeriod(S[idx].day,LAST,chip);
+    }
+  });
+});
+[dFrom,dTo].forEach(inp=>inp.addEventListener("change",()=>{
+  let f=dFrom.value||FIRST, to=dTo.value||LAST;
+  if(f>to) [f,to]=[to,f];
+  state.from=f; state.to=to;
+  document.querySelectorAll("#chips-period .chip").forEach(c=>c.classList.remove("on"));
+  render();
+}));
+document.querySelectorAll("#chips-front .chip").forEach(chip=>{
+  chip.addEventListener("click",()=>{
+    state.front=chip.dataset.f;
+    document.querySelectorAll("#chips-front .chip").forEach(c=>c.classList.toggle("on",c===chip));
+    render();
+  });
+});
+document.querySelectorAll("#ads-table th").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const kk=th.dataset.s;
+    if(state.sort.key===kk) state.sort.dir*=-1;
+    else state.sort={key:kk, dir: kk==="front"||kk==="ad"?1:-1};
+    render();
+  });
+});
+
+render();
 </script>
 </body>
 </html>
