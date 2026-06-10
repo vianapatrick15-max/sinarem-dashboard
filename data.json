@@ -17,25 +17,25 @@
     "inscritos": 662,
     "publico_n": 577,
     "pct_publico": 87.2,
-    "spend": 14984.67,
+    "spend": 15034.53,
     "spend_aristo": 10453.86,
-    "spend_medq": 4530.81,
-    "impressions": 784323,
-    "clicks": 2676,
-    "lpv": 1753,
-    "cpl_blended": 22.64,
-    "cpc": 5.6,
-    "cplpv": 8.55,
-    "pct_budget_gasto": 23.4
+    "spend_medq": 4580.67,
+    "impressions": 789769,
+    "clicks": 2693,
+    "lpv": 1755,
+    "cpl_blended": 22.71,
+    "cpc": 5.58,
+    "cplpv": 8.57,
+    "pct_budget_gasto": 23.5
   },
   "pace": {
     "full_days": 6,
     "leads_per_day": 98.8,
     "spend_per_day": 2235.28,
     "need_per_day": 328.2,
-    "budget_per_day_needed": 4084.61,
+    "budget_per_day_needed": 4080.46,
     "proj_total": 1848,
-    "proj_spend": 41808.05,
+    "proj_spend": 41857.91,
     "on_track_leads": false,
     "on_track_cpl": false
   },
@@ -97,11 +97,11 @@
     {
       "day": "2026-06-10",
       "leads": 69,
-      "spend": 1572.98,
+      "spend": 1622.84,
       "spend_aristo": 838.51,
-      "spend_medq": 734.47,
+      "spend_medq": 784.33,
       "cum_leads": 662,
-      "cum_spend": 14984.67
+      "cum_spend": 15034.53
     }
   ],
   "fronts": [
@@ -114,10 +114,10 @@
     },
     {
       "front": "MedQ",
-      "spend": 4530.81,
-      "impressions": 439027.0,
-      "clicks": 1148.0,
-      "lpv": 681.0
+      "spend": 4580.67,
+      "impressions": 444473.0,
+      "clicks": 1165.0,
+      "lpv": 683.0
     }
   ],
   "ads_daily": [
@@ -140,18 +140,18 @@
     {
       "day": "2026-06-05",
       "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 195.98,
-      "clicks": 71,
-      "lpv": 54
+      "ad": "ad01_img_oficial2026",
+      "spend": 190.68,
+      "clicks": 77,
+      "lpv": 51
     },
     {
       "day": "2026-06-05",
       "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 162.89,
-      "clicks": 70,
-      "lpv": 46
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 151.44,
+      "clicks": 60,
+      "lpv": 47
     },
     {
       "day": "2026-06-05",
@@ -168,6 +168,22 @@
       "spend": 14.9,
       "clicks": 2,
       "lpv": 2
+    },
+    {
+      "day": "2026-06-05",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 9.52,
+      "clicks": 3,
+      "lpv": 2
+    },
+    {
+      "day": "2026-06-05",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 7.23,
+      "clicks": 1,
+      "lpv": 0
     },
     {
       "day": "2026-06-06",
@@ -188,18 +204,10 @@
     {
       "day": "2026-06-06",
       "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 498.4,
-      "clicks": 119,
-      "lpv": 79
-    },
-    {
-      "day": "2026-06-06",
-      "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 452.7,
-      "clicks": 117,
-      "lpv": 76
+      "ad": "ad01_img_oficial2026",
+      "spend": 476.63,
+      "clicks": 115,
+      "lpv": 77
     },
     {
       "day": "2026-06-06",
@@ -208,6 +216,30 @@
       "spend": 390.14,
       "clicks": 49,
       "lpv": 27
+    },
+    {
+      "day": "2026-06-06",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 342.29,
+      "clicks": 97,
+      "lpv": 61
+    },
+    {
+      "day": "2026-06-06",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 85.41,
+      "clicks": 17,
+      "lpv": 12
+    },
+    {
+      "day": "2026-06-06",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 46.77,
+      "clicks": 7,
+      "lpv": 5
     },
     {
       "day": "2026-06-06",
@@ -236,10 +268,10 @@
     {
       "day": "2026-06-07",
       "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 556.58,
-      "clicks": 127,
-      "lpv": 73
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 569.43,
+      "clicks": 144,
+      "lpv": 80
     },
     {
       "day": "2026-06-07",
@@ -252,10 +284,26 @@
     {
       "day": "2026-06-07",
       "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 218.63,
-      "clicks": 51,
-      "lpv": 26
+      "ad": "ad01_img_oficial2026",
+      "spend": 149.66,
+      "clicks": 24,
+      "lpv": 14
+    },
+    {
+      "day": "2026-06-07",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 40.08,
+      "clicks": 8,
+      "lpv": 4
+    },
+    {
+      "day": "2026-06-07",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 16.04,
+      "clicks": 2,
+      "lpv": 1
     },
     {
       "day": "2026-06-07",
@@ -267,19 +315,19 @@
     },
     {
       "day": "2026-06-08",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 920.62,
+      "clicks": 224,
+      "lpv": 142
+    },
+    {
+      "day": "2026-06-08",
       "front": "Aristo",
       "ad": "ad02_img_coloqueaprova",
       "spend": 786.61,
       "clicks": 114,
       "lpv": 83
-    },
-    {
-      "day": "2026-06-08",
-      "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 754.44,
-      "clicks": 179,
-      "lpv": 111
     },
     {
       "day": "2026-06-08",
@@ -300,10 +348,26 @@
     {
       "day": "2026-06-08",
       "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 212.28,
-      "clicks": 58,
-      "lpv": 38
+      "ad": "ad03_car_datamarcada",
+      "spend": 21.48,
+      "clicks": 8,
+      "lpv": 4
+    },
+    {
+      "day": "2026-06-08",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 13.96,
+      "clicks": 3,
+      "lpv": 3
+    },
+    {
+      "day": "2026-06-08",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 10.66,
+      "clicks": 2,
+      "lpv": 0
     },
     {
       "day": "2026-06-08",
@@ -323,19 +387,19 @@
     },
     {
       "day": "2026-06-09",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 696.16,
+      "clicks": 159,
+      "lpv": 71
+    },
+    {
+      "day": "2026-06-09",
       "front": "Aristo",
       "ad": "ad03_car_datamarcada",
       "spend": 519.72,
       "clicks": 41,
       "lpv": 28
-    },
-    {
-      "day": "2026-06-09",
-      "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 515.6,
-      "clicks": 112,
-      "lpv": 50
     },
     {
       "day": "2026-06-09",
@@ -348,10 +412,10 @@
     {
       "day": "2026-06-09",
       "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 228.84,
-      "clicks": 68,
-      "lpv": 36
+      "ad": "ad03_car_datamarcada",
+      "spend": 39.92,
+      "clicks": 18,
+      "lpv": 13
     },
     {
       "day": "2026-06-09",
@@ -362,12 +426,28 @@
       "lpv": 0
     },
     {
+      "day": "2026-06-09",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 5.29,
+      "clicks": 3,
+      "lpv": 2
+    },
+    {
+      "day": "2026-06-09",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 3.07,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
       "day": "2026-06-10",
       "front": "MedQ",
-      "ad": "lal_alunos_medq",
-      "spend": 461.95,
-      "clicks": 93,
-      "lpv": 47
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 635.52,
+      "clicks": 156,
+      "lpv": 81
     },
     {
       "day": "2026-06-10",
@@ -376,14 +456,6 @@
       "spend": 329.91,
       "clicks": 38,
       "lpv": 26
-    },
-    {
-      "day": "2026-06-10",
-      "front": "MedQ",
-      "ad": "publico_adv",
-      "spend": 272.52,
-      "clicks": 83,
-      "lpv": 45
     },
     {
       "day": "2026-06-10",
@@ -403,11 +475,35 @@
     },
     {
       "day": "2026-06-10",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 77.76,
+      "clicks": 22,
+      "lpv": 10
+    },
+    {
+      "day": "2026-06-10",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 64.46,
+      "clicks": 13,
+      "lpv": 3
+    },
+    {
+      "day": "2026-06-10",
       "front": "Aristo",
       "ad": "ad04_car_porqueparticipar",
       "spend": 20.95,
       "clicks": 3,
       "lpv": 3
+    },
+    {
+      "day": "2026-06-10",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 6.59,
+      "clicks": 2,
+      "lpv": 0
     }
   ],
   "perfil": [
