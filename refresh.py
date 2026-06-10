@@ -73,13 +73,16 @@ gc = get_client()
 sh = gc.open_by_key(SID)
 
 # ---------- GERENCIADOR (2 frentes) ----------
-def read_front(title, front, camp_filter, ad_col):
-    """Le uma aba de gerenciador e devolve agregados + diario por criativo."""
+def read_front(title, front, camp_filter, ad_cols):
+    """Le uma aba de gerenciador e devolve agregados + diario por criativo.
+    ad_cols: lista de colunas candidatas p/ identificar o criativo — usa a
+    primeira que existir no header (a aba MedQ nem sempre exporta Ad Name)."""
     g = sh.worksheet(title).get_all_values()
     gh = {h.strip(): i for i, h in enumerate(g[0])}
     C_DAY, C_CAMP = gh["Day"], gh["Campaign Name"]
     C_IMPR, C_SPEND, C_CLK = gh["Impressions"], gh["Amount Spent"], gh["Link Clicks"]
-    C_LPV, C_AD = gh["Landing Page Views"], gh[ad_col]
+    C_LPV = gh["Landing Page Views"]
+    C_AD = next(gh[c] for c in ad_cols if c in gh)
     rows = [r for r in g[1:] if any(c.strip() for c in r) and len(r) > C_CAMP
             and (not camp_filter or is_sinarem(r[C_CAMP]))]
     agg = {"front": front, "spend": 0.0, "impressions": 0.0, "clicks": 0.0, "lpv": 0.0}
@@ -99,8 +102,8 @@ def read_front(title, front, camp_filter, ad_col):
         if len(r) > C_LPV: m["lpv"] += num(r[C_LPV])
     return agg, by_day, by_day_ad
 
-aristo, aristo_day, aristo_day_ads = read_front("DADOS_GERENCIADOR", "Aristo", True, "Ad Name")
-medq, medq_day, medq_day_ads = read_front("DADOS_GERENCIADOR_MEDQ", "MedQ", False, "Ad Set Name")
+aristo, aristo_day, aristo_day_ads = read_front("DADOS_GERENCIADOR", "Aristo", True, ["Ad Name"])
+medq, medq_day, medq_day_ads = read_front("DADOS_GERENCIADOR_MEDQ", "MedQ", False, ["Ad Name", "Ad Set Name"])
 
 spend = aristo["spend"] + medq["spend"]
 impr = aristo["impressions"] + medq["impressions"]
