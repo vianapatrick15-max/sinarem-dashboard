@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINAREM — Captação do Simulado</title>
+<style>
+  :root{
+    --navy:#143250; --navy2:#1d4b78; --ink:#0f1d2b; --muted:#6b7c8f;
+    --line:#e6ebf0; --bg:#eef1f5; --card:#fff;
+    --good:#159b62; --good-bg:#e7f6ee; --warn:#d98a1f; --warn-bg:#fcf3e2;
+    --bad:#d6453d; --bad-bg:#fbeae9; --accent:#2a7de1; --accent2:#7aa9d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
+    border-bottom:2px solid var(--navy);padding-bottom:16px;margin-bottom:22px}
+  .ttl .kick{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy2)}
+  .ttl h1{font-size:27px;font-weight:800;color:var(--navy);letter-spacing:-.01em;margin-top:2px}
+  .ttl .sub{font-size:13px;color:var(--muted);margin-top:3px}
+  .count{text-align:right}
+  .count .big{font-size:34px;font-weight:800;color:var(--navy);line-height:1}
+  .count .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+  .verdict{border-radius:14px;padding:18px 22px;margin-bottom:24px;display:flex;gap:16px;align-items:flex-start}
+  .verdict .dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:5px}
+  .verdict h2{font-size:18px;font-weight:800;margin-bottom:4px}
+  .verdict p{font-size:14px;opacity:.92}
+  .v-bad{background:var(--bad-bg);color:#7e211c}.v-bad .dot{background:var(--bad)}
+  .v-warn{background:var(--warn-bg);color:#7a4d0e}.v-warn .dot{background:var(--warn)}
+  .v-good{background:var(--good-bg);color:#0c5e3a}.v-good .dot{background:var(--good)}
+  .seclab{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);margin:26px 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:780px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px 18px}
+  .card .k{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .card .v{font-size:30px;font-weight:800;color:var(--ink);margin:6px 0 2px;letter-spacing:-.01em}
+  .card .v small{font-size:15px;font-weight:600;color:var(--muted)}
+  .card .meta{font-size:12.5px;color:var(--muted)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-left:7px;vertical-align:middle}
+  .pill.good{background:var(--good-bg);color:var(--good)}
+  .pill.warn{background:var(--warn-bg);color:var(--warn)}
+  .pill.bad{background:var(--bad-bg);color:var(--bad)}
+  .bar{height:7px;border-radius:5px;background:#eaeef2;margin-top:11px;overflow:hidden}
+  .bar > i{display:block;height:100%;border-radius:5px}
+  .pace{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:780px){.pace{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+  .panel h3{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+  .rate{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .rate:last-child{border-bottom:0}
+  .rate .lab{font-size:13px;color:var(--muted)}
+  .rate .num{font-size:17px;font-weight:800;color:var(--ink)}
+  .rate .num.bad{color:var(--bad)}.rate .num.good{color:var(--good)}.rate .num.warn{color:var(--warn)}
+  .charts{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+  @media(max-width:780px){.charts{grid-template-columns:1fr}}
+  .chartbox{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .chartbox h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+  .chartbox .hint{font-size:11.5px;color:var(--muted);margin-bottom:10px}
+  .cw{position:relative;height:240px}
+  .hbar{display:flex;align-items:center;gap:10px;padding:6px 0}
+  .hbar .hlab{flex:0 0 290px;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hbar .htrack{flex:1;height:14px;background:#eaeef2;border-radius:7px;overflow:hidden}
+  .hbar .htrack i{display:block;height:100%;border-radius:7px;background:var(--accent)}
+  .hbar.dim .htrack i{background:var(--accent2)}
+  .hbar .hnum{flex:0 0 110px;text-align:right;font-size:12.5px;font-weight:700}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  th,td{padding:11px 14px;text-align:right;font-size:13.5px;border-bottom:1px solid var(--line)}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#f7f9fb}
+  td.ad{font-weight:600;color:var(--ink)}
+  .tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:5px}
+  .tag.aristo{background:#e3edf8;color:var(--navy2)}
+  .tag.medq{background:#efe7f8;color:#6b3fa0}
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy2);
+    border-radius:10px;padding:16px 18px;margin-top:14px;font-size:13.5px}
+  .note.flag{border-left-color:var(--warn)}
+  .note h4{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+  .note ul{margin:0 0 0 18px}.note li{margin:6px 0}
+  .note.flag h4{color:var(--warn)}
+  footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="ttl">
+      <div class="kick">Aristo + MedQ · SINAREM 2026</div>
+      <h1>Captação do Simulado</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="count">
+      <div class="big" id="cd-days">–</div>
+      <div class="lbl">dias até a abertura da prova</div>
+    </div>
+  </header>
+
+  <div class="verdict" id="verdict">
+    <div class="dot"></div>
+    <div><h2 id="v-title"></h2><p id="v-text"></p></div>
+  </div>
+
+  <div class="seclab">Como estamos vs a meta</div>
+  <div class="grid" id="kpis"></div>
+
+  <div class="seclab">Ritmo e projeção até o fim da captação (21/06)</div>
+  <div class="pace">
+    <div class="panel">
+      <h3>Ritmo de inscritos</h3>
+      <div id="pace-leads"></div>
+    </div>
+    <div class="panel">
+      <h3>Uso da verba de anúncios</h3>
+      <div id="pace-budget"></div>
+    </div>
+  </div>
+
+  <div class="seclab">Evolução dos inscritos</div>
+  <div class="charts">
+    <div class="chartbox">
+      <h3>Inscritos — acumulado vs meta</h3>
+      <div class="hint" id="burnup-hint"></div>
+      <div class="cw" id="burnup"></div>
+    </div>
+    <div class="chartbox">
+      <h3>Inscritos e investimento por dia</h3>
+      <div class="hint">Barras = inscritos no dia · linha = investido no dia (duas frentes somadas).</div>
+      <div class="cw" id="daily"></div>
+    </div>
+  </div>
+
+  <div class="seclab">Quem está se inscrevendo</div>
+  <div class="panel" id="perfil"></div>
+
+  <div class="seclab">Investimento por anúncio / conjunto</div>
+  <table id="ads-table">
+    <thead><tr><th>Frente</th><th>Anúncio / Conjunto</th><th>Investido</th><th>Cliques</th><th>Visitas à página</th><th>Custo por visita</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="seclab">Resumo para a diretoria</div>
+  <div id="actions"></div>
+
+  <footer>
+    <span id="ft-updated"></span>
+    <span>Fonte: planilha de acompanhamento — anúncios Aristo + MedQ (Meta) e inscrições (HubSpot). Custo por inscrito = verba total ÷ inscritos totais.</span>
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const BRL = n => "R$ " + Math.round(n||0).toLocaleString("pt-BR");
+const BRL2 = n => "R$ " + (n||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const NUM = n => (n||0).toLocaleString("pt-BR");
+const fmtDay = d => { const [y,m,dd]=d.split("-"); return dd+"/"+m; };
+const k = DATA.kpis, p = DATA.pace, t = DATA.targets;
+
+// nomes legíveis dos anúncios/conjuntos (sem código interno)
+function adLabel(name){
+  const map={
+    "ad01_img_oficial2026":"O simulado oficial de 2026",
+    "ad02_img_coloqueaprova":"Coloque a sua prova à prova",
+    "ad03_car_datamarcada":"A data está marcada",
+    "ad04_car_porqueparticipar":"Por que participar",
+    "lal_alunos_medq":"Público parecido com alunos MedQ",
+    "publico_adv":"Público amplo (Advantage+)",
+  };
+  if(map[name]) return map[name];
+  return (name||"—").replace(/^ad\d+_(img|vid|car)_/,'').replace(/_/g,' ');
+}
+
+// header
+document.getElementById("sub").textContent =
+  `Anúncios no ar desde ${fmtDay(DATA.campaign_start)} · Prova 19 a 21/06 (último início dom 17h) · dados de ${fmtDay(DATA.today)}`;
+document.getElementById("cd-days").textContent = DATA.days_to_event;
+document.getElementById("ft-updated").textContent = "Atualizado em " + DATA.updated_at.replace("T"," ").slice(0,16);
+document.getElementById("burnup-hint").textContent =
+  `A linha pontilhada mostra onde precisaríamos estar a cada dia para chegar a ${NUM(t.total)} inscritos até 21/06.`;
+
+// verdict
+const projGap = p.proj_total / t.total;
+let vcls, vtitle;
+if (p.proj_total >= t.total*0.95 && k.cpl_blended <= t.cpl*1.05){
+  vcls="v-good"; vtitle="No caminho de bater a meta";
+} else if (p.proj_total >= t.total*0.7){
+  vcls="v-warn"; vtitle="Atenção: ritmo abaixo do necessário";
+} else {
+  vcls="v-bad"; vtitle="Abaixo do ritmo — meta em risco";
+}
+const accel = p.leads_per_day ? (p.need_per_day/p.leads_per_day) : 0;
+const vtext =
+  `No ritmo de hoje (${NUM(p.leads_per_day)} inscritos por dia), o simulado fecha com cerca de `
+  + `${NUM(p.proj_total)} inscritos — ${Math.round(projGap*100)}% da meta de ${NUM(t.total)} — `
+  + `usando ~${BRL(p.proj_spend)} dos ${BRL(t.budget)} previstos em mídia. `
+  + (p.need_per_day>0
+      ? `Para bater a meta seriam precisos ${NUM(p.need_per_day)} inscritos por dia`
+        + (accel>1.05 ? `, ${accel.toFixed(1)}x o ritmo atual. ` : `. `)
+      : `A meta de inscritos já foi atingida. `)
+  + `O custo por inscrito hoje é ${BRL2(k.cpl_blended)} — a referência é ${BRL(t.cpl)}.`;
+const vd = document.getElementById("verdict");
+vd.className = "verdict "+vcls;
+document.getElementById("v-title").textContent = vtitle;
+document.getElementById("v-text").textContent = vtext;
+
+// KPIs
+function pct(a,b){return Math.min(100, Math.round(100*a/b));}
+function colorFor(ratio,invert){
+  if(invert){ if(ratio<=1.0)return"good"; if(ratio<=1.1)return"warn"; return"bad";}
+  if(ratio>=0.95)return"good"; if(ratio>=0.6)return"warn"; return"bad";
+}
+const barc = {good:"var(--good)",warn:"var(--warn)",bad:"var(--bad)"};
+const shareAristo = Math.round(100*k.spend_aristo/k.spend);
+const kpis = [
+  {k:"Inscritos no simulado", v:NUM(k.inscritos), small:"de "+NUM(t.total), p:pct(k.inscritos,t.total), c:colorFor(k.inscritos/t.total), meta:pct(k.inscritos,t.total)+"% da meta de "+NUM(t.total)+" inscritos"},
+  {k:"Investido em anúncios", v:BRL(k.spend), small:"de "+BRL(t.budget), p:pct(k.spend,t.budget), c:k.pct_budget_gasto<40?"bad":(k.pct_budget_gasto<70?"warn":"good"), meta:k.pct_budget_gasto+"% da verba usada · "+DATA.days_left+" dias de captação restantes"},
+  {k:"Custo por inscrito", v:BRL2(k.cpl_blended), small:"ref. "+BRL(t.cpl), p:Math.min(100,Math.round(100*t.cpl/(k.cpl_blended||1))), c:colorFor((k.cpl_blended||0)/t.cpl,true), meta:(k.cpl_blended>t.cpl?Math.round(100*(k.cpl_blended/t.cpl-1))+"% acima da referência":"dentro da referência")+" · verba total ÷ inscritos totais"},
+  {k:"Frente Aristo", v:BRL(k.spend_aristo), small:shareAristo+"% da mídia", p:shareAristo, c:"good", meta:NUM(DATA.fronts[0].lpv)+" visitas à página · "+NUM(DATA.fronts[0].clicks)+" cliques"},
+  {k:"Frente MedQ", v:BRL(k.spend_medq), small:(100-shareAristo)+"% da mídia", p:100-shareAristo, c:"good", meta:NUM(DATA.fronts[1].lpv)+" visitas à página · "+NUM(DATA.fronts[1].clicks)+" cliques"},
+  {k:"Público certo", v:k.pct_publico+"%", small:NUM(k.publico_n)+" de "+NUM(k.inscritos), p:Math.round(k.pct_publico), c:k.pct_publico>=80?"good":(k.pct_publico>=60?"warn":"bad"), meta:"em preparação para residência (inclui internato)"},
+];
+document.getElementById("kpis").innerHTML = kpis.map(c=>`
+  <div class="card">
+    <div class="k">${c.k}</div>
+    <div class="v">${c.v} <small>${c.small||""}</small> <span class="pill ${c.c}">${c.p}%</span></div>
+    <div class="meta">${c.meta}</div>
+    <div class="bar"><i style="width:${c.p}%;background:${barc[c.c]}"></i></div>
+  </div>`).join("");
+
+// pace
+function rate(lab,num,cls){return `<div class="rate"><span class="lab">${lab}</span><span class="num ${cls||''}">${num}</span></div>`;}
+document.getElementById("pace-leads").innerHTML =
+  rate("Entrando por dia (média)", NUM(p.leads_per_day)+" inscritos")
+ +rate("Precisaria entrar por dia", NUM(p.need_per_day)+" inscritos", p.need_per_day>p.leads_per_day?"bad":"good")
+ +(accel>1.05 ? rate("Quanto precisa acelerar", accel.toFixed(1)+"x", "bad") : "")
+ +rate("Projeção no ritmo de hoje", NUM(p.proj_total)+" inscritos", p.proj_total>=t.total*0.95?"good":(p.proj_total>=t.total*0.7?"warn":"bad"))
+ +rate("Custo por visita à página", BRL2(k.cplpv));
+document.getElementById("pace-budget").innerHTML =
+  rate("Investido por dia (média)", BRL(p.spend_per_day))
+ +rate("Precisaria investir por dia", BRL(p.budget_per_day_needed), p.budget_per_day_needed>p.spend_per_day*1.1?"warn":"good")
+ +rate("Verba ainda disponível", BRL(t.budget-k.spend))
+ +rate("Projeção de gasto até 21/06", BRL(p.proj_spend), p.proj_spend>=t.budget*0.9?"good":"bad")
+ +rate("Sobraria sem uso", BRL(Math.max(0,t.budget-p.proj_spend)), Math.max(0,t.budget-p.proj_spend)>t.budget*0.15?"bad":"good");
+
+// gráficos em SVG nativo — sem biblioteca externa, 100% offline
+const compact = v => v>=1000 ? (v/1000).toFixed(1).replace(".0","")+"k" : Math.round(v);
+
+function svgBurnup(){
+  const W=640,H=240,L=46,R=16,T=24,B=28, iw=W-L-R, ih=H-T-B;
+  const s=DATA.series, n=s.length, cum=s.map(x=>x.cum_leads);
+  const start=new Date(DATA.campaign_start), end=new Date(DATA.capture_end);
+  const td=(end-start)/86400000 || 1;
+  const meta=s.map(x=>Math.round(t.total*((new Date(x.day)-start)/86400000+1)/(td+1)));
+  const ymax=Math.max(10,...cum,...meta)*1.15;
+  const X=i=> L+(n<=1?iw/2:iw*i/(n-1)), Y=v=> T+ih-ih*v/ymax, base=T+ih;
+  let g="";
+  for(let i=0;i<=4;i++){const v=ymax*i/4,yy=Y(v);
+    g+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#eef1f4"/>`;
+    g+=`<text x="${L-6}" y="${yy+3}" text-anchor="end" font-size="10" fill="#6b7c8f">${compact(v)}</text>`;}
+  const step=Math.max(1,Math.ceil(n/12));
+  s.forEach((x,i)=>{ if(i%step===0||i===n-1) g+=`<text x="${X(i)}" y="${H-9}" text-anchor="middle" font-size="10" fill="#6b7c8f">${fmtDay(x.day)}</text>`;});
+  const mp=meta.map((v,i)=>`${X(i)},${Y(v)}`).join(" ");
+  g+=`<polyline points="${mp}" fill="none" stroke="#d6453d" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+  const rp=cum.map((v,i)=>`${X(i)},${Y(v)}`).join(" ");
+  g+=`<polygon points="${L},${base} ${rp} ${X(n-1)},${base}" fill="rgba(20,50,80,.08)"/>`;
+  g+=`<polyline points="${rp}" fill="none" stroke="#143250" stroke-width="2.5"/>`;
+  cum.forEach((v,i)=> g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="3" fill="#143250"/>`);
+  g+=`<text x="${X(n-1)}" y="${Y(cum[n-1])-9}" text-anchor="middle" font-size="11" font-weight="700" fill="#143250">${NUM(cum[n-1])}</text>`;
+  g+=`<rect x="${L}" y="6" width="11" height="3" fill="#143250"/><text x="${L+15}" y="9" font-size="10" fill="#6b7c8f">Inscritos reais</text>`;
+  g+=`<rect x="${L+108}" y="6" width="11" height="3" fill="#d6453d"/><text x="${L+123}" y="9" font-size="10" fill="#6b7c8f">Onde deveríamos estar</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`;
+}
+
+function svgDaily(){
+  const W=440,H=240,L=34,R=38,T=26,B=28, iw=W-L-R, ih=H-T-B;
+  const s=DATA.series,n=s.length, leads=s.map(x=>x.leads), spend=s.map(x=>x.spend);
+  const ymaxL=Math.max(1,...leads)*1.35, ymaxR=Math.max(1,...spend)*1.3;
+  const bw=Math.min(34, iw/n*0.5), cx=i=> L+iw*(i+0.5)/n;
+  const YL=v=> T+ih-ih*v/ymaxL, YR=v=> T+ih-ih*v/ymaxR, base=T+ih;
+  let g="";
+  for(let i=0;i<=3;i++){const v=ymaxL*i/3,yy=YL(v);
+    g+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#eef1f4"/>`;
+    g+=`<text x="${L-5}" y="${yy+3}" text-anchor="end" font-size="10" fill="#6b7c8f">${Math.round(v)}</text>`;}
+  const step=Math.max(1,Math.ceil(n/9));
+  s.forEach((x,i)=>{const yy=YL(leads[i]);
+    g+=`<rect x="${cx(i)-bw/2}" y="${yy}" width="${bw}" height="${Math.max(0,base-yy)}" rx="3" fill="#2a7de1"/>`;
+    g+=`<text x="${cx(i)}" y="${yy-4}" text-anchor="middle" font-size="10" font-weight="700" fill="#2a7de1">${leads[i]}</text>`;
+    if(i%step===0||i===n-1) g+=`<text x="${cx(i)}" y="${H-9}" text-anchor="middle" font-size="10" fill="#6b7c8f">${fmtDay(x.day)}</text>`;});
+  const sp=spend.map((v,i)=>`${cx(i)},${YR(v)}`).join(" ");
+  g+=`<polyline points="${sp}" fill="none" stroke="#d98a1f" stroke-width="2"/>`;
+  spend.forEach((v,i)=> g+=`<circle cx="${cx(i)}" cy="${YR(v)}" r="3" fill="#d98a1f"/>`);
+  for(let i=0;i<=3;i++){const v=ymaxR*i/3;g+=`<text x="${W-R+5}" y="${YR(v)+3}" text-anchor="start" font-size="9" fill="#d98a1f">${compact(v)}</text>`;}
+  g+=`<rect x="${L}" y="6" width="11" height="9" fill="#2a7de1"/><text x="${L+15}" y="13" font-size="10" fill="#6b7c8f">Inscritos</text>`;
+  g+=`<rect x="${L+78}" y="9" width="11" height="3" fill="#d98a1f"/><text x="${L+93}" y="13" font-size="10" fill="#6b7c8f">R$ investido</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="Inter,sans-serif">${g}</svg>`;
+}
+document.getElementById("burnup").innerHTML = svgBurnup();
+document.getElementById("daily").innerHTML = svgDaily();
+
+// quebra por perfil
+const pmax = Math.max(...DATA.perfil.map(x=>x.n));
+document.getElementById("perfil").innerHTML = DATA.perfil.slice(0,8).map((x,i)=>`
+  <div class="hbar ${i>2?'dim':''}">
+    <span class="hlab" title="${x.label}">${x.label}</span>
+    <span class="htrack"><i style="width:${Math.round(100*x.n/pmax)}%"></i></span>
+    <span class="hnum">${NUM(x.n)} · ${x.pct}%</span>
+  </div>`).join("");
+
+// tabela de anúncios/conjuntos
+const tb = document.querySelector("#ads-table tbody");
+tb.innerHTML = DATA.ads.map(a=>`
+  <tr>
+    <td><span class="tag ${a.front.toLowerCase()}">${a.front}</span></td>
+    <td class="ad">${adLabel(a.ad)}</td>
+    <td>${BRL(a.spend)}</td>
+    <td>${NUM(a.clicks)}</td>
+    <td>${NUM(a.lpv)}</td>
+    <td>${a.cplpv?BRL2(a.cplpv):"—"}</td>
+  </tr>`).join("");
+
+// resumo diretoria (gerado a partir dos números do dia)
+const sobra = Math.max(0,t.budget-p.proj_spend);
+const best = DATA.ads.filter(a=>a.cplpv).sort((a,b)=>a.cplpv-b.cplpv)[0];
+const notes = [];
+notes.push(`<div class="note">
+  <h4>Onde estamos</h4>
+  <ul>
+    <li>Em ${p.full_days} dias de captação temos <b>${NUM(k.inscritos)} inscritos</b> (${pct(k.inscritos,t.total)}% da meta de ${NUM(t.total)}), com <b>${k.pct_publico}% do público certo</b> — gente em preparação para residência.</li>
+    <li>Já investimos <b>${BRL(k.spend)}</b> (${k.pct_budget_gasto}% da verba): ${BRL(k.spend_aristo)} pela frente Aristo e ${BRL(k.spend_medq)} pela MedQ. O custo por inscrito está em <b>${BRL2(k.cpl_blended)}</b> (referência ${BRL(t.cpl)}).</li>
+  </ul>
+</div>`);
+if (p.proj_total < t.total*0.95 || sobra > t.budget*0.15){
+  notes.push(`<div class="note flag">
+    <h4>O que precisa de atenção</h4>
+    <ul>
+      ${p.proj_total < t.total*0.95 ? `<li>No ritmo atual (${NUM(p.leads_per_day)}/dia) chegamos a ~<b>${NUM(p.proj_total)} inscritos</b> em 21/06. Para bater ${NUM(t.total)} precisamos de <b>${NUM(p.need_per_day)}/dia</b>${accel>1.05?` — ${accel.toFixed(1)}x o ritmo de hoje`:``}.</li>` : ``}
+      ${sobra > t.budget*0.15 ? `<li>Estamos investindo ${BRL(p.spend_per_day)}/dia, mas para usar toda a verba até 21/06 seriam ${BRL(p.budget_per_day_needed)}/dia — no ritmo atual sobram ~<b>${BRL(sobra)}</b> sem uso.</li>` : ``}
+    </ul>
+  </div>`);
+}
+notes.push(`<div class="note">
+  <h4>Próximos passos</h4>
+  <ul>
+    ${p.budget_per_day_needed > p.spend_per_day*1.1 ? `<li><b>Acelerar o investimento diário</b> nas duas frentes — a reta final (semana da prova) é quando a captação mais converte.</li>` : `<li><b>Manter o ritmo de investimento</b> e monitorar o custo por inscrito na reta final.</li>`}
+    ${best ? `<li><b>Priorizar o criativo mais eficiente</b> em tráfego ("${adLabel(best.ad)}", ${BRL2(best.cplpv)} por visita) na hora de escalar.</li>` : ``}
+    <li><b>Reforçar os canais próprios</b> (e-mail, redes, base de alunos) nos últimos dias — boa parte dos inscritos chega por eles.</li>
+  </ul>
+</div>`);
+document.getElementById("actions").innerHTML = notes.join("");
+</script>
+</body>
+</html>
