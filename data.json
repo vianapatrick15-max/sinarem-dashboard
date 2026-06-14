@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-06-13T12:00:00",
-  "today": "2026-06-13",
+  "updated_at": "2026-06-14T12:00:00",
+  "today": "2026-06-14",
   "event_start": "2026-06-19",
   "capture_end": "2026-06-21",
   "campaign_start": "2026-06-04",
-  "days_left": 8,
-  "days_to_event": 6,
+  "days_left": 7,
+  "days_to_event": 5,
   "targets": {
     "cpl": 20.0,
     "budget": 64000.0,
@@ -14,28 +14,28 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1126,
-    "publico_n": 1010,
-    "pct_publico": 89.7,
-    "spend": 40123.03,
-    "spend_aristo": 28986.08,
-    "spend_medq": 11136.95,
-    "impressions": 2844100,
-    "clicks": 12824,
-    "lpv": 7314,
-    "cpl_blended": 35.63,
-    "cpc": 3.13,
-    "cplpv": 5.49,
-    "pct_budget_gasto": 62.7
+    "inscritos": 1233,
+    "publico_n": 1112,
+    "pct_publico": 90.2,
+    "spend": 44775.43,
+    "spend_aristo": 32285.71,
+    "spend_medq": 12489.72,
+    "impressions": 3251235,
+    "clicks": 15584,
+    "lpv": 8543,
+    "cpl_blended": 36.31,
+    "cpc": 2.87,
+    "cplpv": 5.24,
+    "pct_budget_gasto": 70.0
   },
   "pace": {
-    "full_days": 9,
-    "leads_per_day": 123.2,
-    "spend_per_day": 4387.53,
-    "need_per_day": 386.0,
-    "budget_per_day_needed": 2653.0,
-    "proj_total": 2235,
-    "proj_spend": 79610.81,
+    "full_days": 10,
+    "leads_per_day": 121.8,
+    "spend_per_day": 4438.63,
+    "need_per_day": 420.9,
+    "budget_per_day_needed": 2403.07,
+    "proj_total": 2207,
+    "proj_spend": 80284.45,
     "on_track_leads": false,
     "on_track_cpl": false
   },
@@ -106,45 +106,54 @@
     {
       "day": "2026-06-11",
       "leads": 207,
-      "spend": 9449.93,
-      "spend_aristo": 6767.49,
-      "spend_medq": 2682.44,
+      "spend": 9450.01,
+      "spend_aristo": 6767.53,
+      "spend_medq": 2682.48,
       "cum_leads": 972,
-      "cum_spend": 30071.12
+      "cum_spend": 30071.2
     },
     {
       "day": "2026-06-12",
       "leads": 137,
-      "spend": 9416.66,
-      "spend_aristo": 6751.14,
-      "spend_medq": 2665.52,
+      "spend": 9421.17,
+      "spend_aristo": 6755.41,
+      "spend_medq": 2665.76,
       "cum_leads": 1109,
-      "cum_spend": 39487.78
+      "cum_spend": 39492.37
     },
     {
       "day": "2026-06-13",
-      "leads": 17,
-      "spend": 635.25,
-      "spend_aristo": 392.62,
-      "spend_medq": 242.63,
-      "cum_leads": 1126,
-      "cum_spend": 40123.03
+      "leads": 109,
+      "spend": 4893.9,
+      "spend_aristo": 3423.1,
+      "spend_medq": 1470.8,
+      "cum_leads": 1218,
+      "cum_spend": 44386.27
+    },
+    {
+      "day": "2026-06-14",
+      "leads": 15,
+      "spend": 389.16,
+      "spend_aristo": 264.84,
+      "spend_medq": 124.32,
+      "cum_leads": 1233,
+      "cum_spend": 44775.43
     }
   ],
   "fronts": [
     {
       "front": "Aristo",
-      "spend": 28986.08,
-      "impressions": 1736485.0,
-      "clicks": 9626.0,
-      "lpv": 5710.0
+      "spend": 32285.71,
+      "impressions": 1985915.0,
+      "clicks": 11787.0,
+      "lpv": 6672.0
     },
     {
       "front": "MedQ",
-      "spend": 11136.95,
-      "impressions": 1107615.0,
-      "clicks": 3198.0,
-      "lpv": 1604.0
+      "spend": 12489.72,
+      "impressions": 1265320.0,
+      "clicks": 3797.0,
+      "lpv": 1871.0
     }
   ],
   "ads_daily": [
@@ -536,7 +545,7 @@
       "day": "2026-06-11",
       "front": "MedQ",
       "ad": "ad02_img_coloqueaprova",
-      "spend": 2484.54,
+      "spend": 2484.58,
       "clicks": 730,
       "lpv": 357
     },
@@ -544,7 +553,7 @@
       "day": "2026-06-11",
       "front": "Aristo",
       "ad": "ad03_car_datamarcada",
-      "spend": 2367.0,
+      "spend": 2367.03,
       "clicks": 1621,
       "lpv": 838
     },
@@ -552,7 +561,7 @@
       "day": "2026-06-11",
       "front": "Aristo",
       "ad": "ad01_img_oficial2026",
-      "spend": 2179.55,
+      "spend": 2179.56,
       "clicks": 1076,
       "lpv": 664
     },
@@ -600,7 +609,7 @@
       "day": "2026-06-12",
       "front": "Aristo",
       "ad": "ad03_car_datamarcada",
-      "spend": 2618.18,
+      "spend": 2620.46,
       "clicks": 1995,
       "lpv": 1004
     },
@@ -608,7 +617,7 @@
       "day": "2026-06-12",
       "front": "MedQ",
       "ad": "ad02_img_coloqueaprova",
-      "spend": 2406.73,
+      "spend": 2406.97,
       "clicks": 814,
       "lpv": 344
     },
@@ -616,7 +625,7 @@
       "day": "2026-06-12",
       "front": "Aristo",
       "ad": "ad01_img_oficial2026",
-      "spend": 2063.89,
+      "spend": 2064.69,
       "clicks": 1153,
       "lpv": 782
     },
@@ -624,8 +633,8 @@
       "day": "2026-06-12",
       "front": "Aristo",
       "ad": "ad02_img_coloqueaprova",
-      "spend": 1897.41,
-      "clicks": 681,
+      "spend": 1898.6,
+      "clicks": 682,
       "lpv": 434
     },
     {
@@ -662,100 +671,164 @@
     },
     {
       "day": "2026-06-13",
-      "front": "MedQ",
-      "ad": "ad02_img_coloqueaprova",
-      "spend": 217.61,
-      "clicks": 100,
-      "lpv": 42
-    },
-    {
-      "day": "2026-06-13",
       "front": "Aristo",
       "ad": "ad03_car_datamarcada",
-      "spend": 168.87,
-      "clicks": 151,
-      "lpv": 69
+      "spend": 1328.4,
+      "clicks": 1128,
+      "lpv": 478
     },
     {
       "day": "2026-06-13",
-      "front": "Aristo",
+      "front": "MedQ",
       "ad": "ad02_img_coloqueaprova",
-      "spend": 113.59,
-      "clicks": 53,
-      "lpv": 32
+      "spend": 1216.86,
+      "clicks": 530,
+      "lpv": 234
     },
     {
       "day": "2026-06-13",
       "front": "Aristo",
       "ad": "ad01_img_oficial2026",
-      "spend": 90.28,
-      "clicks": 25,
-      "lpv": 17
+      "spend": 970.15,
+      "clicks": 436,
+      "lpv": 195
     },
     {
       "day": "2026-06-13",
-      "front": "MedQ",
-      "ad": "ad03_car_datamarcada",
-      "spend": 25.02,
-      "clicks": 12,
-      "lpv": 4
+      "front": "Aristo",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 944.27,
+      "clicks": 517,
+      "lpv": 252
     },
     {
       "day": "2026-06-13",
       "front": "Aristo",
       "ad": "ad04_car_porqueparticipar",
-      "spend": 19.88,
-      "clicks": 13,
-      "lpv": 6
+      "spend": 180.28,
+      "clicks": 84,
+      "lpv": 39
+    },
+    {
+      "day": "2026-06-13",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 147.93,
+      "clicks": 54,
+      "lpv": 33
     },
     {
       "day": "2026-06-13",
       "front": "MedQ",
       "ad": "ad04_car_porqueparticipar",
-      "spend": 0.0,
-      "clicks": 0,
+      "spend": 72.57,
+      "clicks": 22,
+      "lpv": 8
+    },
+    {
+      "day": "2026-06-13",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 33.44,
+      "clicks": 16,
+      "lpv": 2
+    },
+    {
+      "day": "2026-06-14",
+      "front": "Aristo",
+      "ad": "ad03_car_datamarcada",
+      "spend": 139.4,
+      "clicks": 159,
+      "lpv": 80
+    },
+    {
+      "day": "2026-06-14",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 91.63,
+      "clicks": 75,
+      "lpv": 32
+    },
+    {
+      "day": "2026-06-14",
+      "front": "Aristo",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 47.34,
+      "clicks": 22,
+      "lpv": 13
+    },
+    {
+      "day": "2026-06-14",
+      "front": "Aristo",
+      "ad": "ad01_img_oficial2026",
+      "spend": 40.16,
+      "clicks": 13,
+      "lpv": 9
+    },
+    {
+      "day": "2026-06-14",
+      "front": "Aristo",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 37.94,
+      "clicks": 43,
+      "lpv": 20
+    },
+    {
+      "day": "2026-06-14",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 25.91,
+      "clicks": 12,
+      "lpv": 4
+    },
+    {
+      "day": "2026-06-14",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 6.78,
+      "clicks": 2,
       "lpv": 0
     }
   ],
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 543,
-      "pct": 48.2
+      "n": 591,
+      "pct": 47.9
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 428,
-      "pct": 38.0
+      "n": 478,
+      "pct": 38.8
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 67,
-      "pct": 6.0
+      "n": 68,
+      "pct": 5.5
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 39,
+      "n": 43,
       "pct": 3.5
     },
     {
       "label": "Médico(a) em preparação para prova de título",
-      "n": 11,
-      "pct": 1.0
+      "n": 13,
+      "pct": 1.1
     },
     {
       "label": "Médico(a) em transição de carreira",
-      "n": 9,
-      "pct": 0.8
-    },
-    {
-      "label": "Ensino médio / pré-vestibular (interessado em Medicina)",
-      "n": 9,
+      "n": 10,
       "pct": 0.8
     },
     {
       "label": "Outro",
-      "n": 8,
+      "n": 9,
+      "pct": 0.7
+    },
+    {
+      "label": "Ensino médio / pré-vestibular (interessado em Medicina)",
+      "n": 9,
       "pct": 0.7
     },
     {
