@@ -14,16 +14,16 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1233,
-    "publico_n": 1112,
-    "pct_publico": 90.2,
+    "inscritos": 1321,
+    "publico_n": 1190,
+    "pct_publico": 90.1,
     "spend": 44775.43,
     "spend_aristo": 32285.71,
     "spend_medq": 12489.72,
     "impressions": 3251235,
     "clicks": 15584,
     "lpv": 8543,
-    "cpl_blended": 36.31,
+    "cpl_blended": 33.9,
     "cpc": 2.87,
     "cplpv": 5.24,
     "pct_budget_gasto": 70.0
@@ -32,9 +32,9 @@
     "full_days": 10,
     "leads_per_day": 121.8,
     "spend_per_day": 4438.63,
-    "need_per_day": 420.9,
+    "need_per_day": 409.9,
     "budget_per_day_needed": 2403.07,
-    "proj_total": 2207,
+    "proj_total": 2295,
     "proj_spend": 80284.45,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -132,11 +132,11 @@
     },
     {
       "day": "2026-06-14",
-      "leads": 15,
+      "leads": 103,
       "spend": 389.16,
       "spend_aristo": 264.84,
       "spend_medq": 124.32,
-      "cum_leads": 1233,
+      "cum_leads": 1321,
       "cum_spend": 44775.43
     }
   ],
@@ -793,33 +793,33 @@
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 591,
-      "pct": 47.9
+      "n": 627,
+      "pct": 47.5
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 478,
-      "pct": 38.8
+      "n": 519,
+      "pct": 39.3
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 68,
+      "n": 72,
       "pct": 5.5
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 43,
-      "pct": 3.5
+      "n": 44,
+      "pct": 3.3
     },
     {
       "label": "Médico(a) em preparação para prova de título",
-      "n": 13,
+      "n": 15,
       "pct": 1.1
     },
     {
       "label": "Médico(a) em transição de carreira",
-      "n": 10,
-      "pct": 0.8
+      "n": 13,
+      "pct": 1.0
     },
     {
       "label": "Outro",
@@ -832,14 +832,14 @@
       "pct": 0.7
     },
     {
-      "label": "Médico(a) residente",
+      "label": "Médico(a) especialista",
       "n": 6,
       "pct": 0.5
     },
     {
-      "label": "Médico(a) especialista",
-      "n": 5,
-      "pct": 0.4
+      "label": "Médico(a) residente",
+      "n": 6,
+      "pct": 0.5
     },
     {
       "label": "Não informado",
