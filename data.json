@@ -14,16 +14,16 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1367,
-    "publico_n": 1233,
-    "pct_publico": 90.2,
+    "inscritos": 1431,
+    "publico_n": 1293,
+    "pct_publico": 90.4,
     "spend": 50152.32,
     "spend_aristo": 36133.25,
     "spend_medq": 14019.07,
     "impressions": 3729310,
     "clicks": 19534,
     "lpv": 10097,
-    "cpl_blended": 36.69,
+    "cpl_blended": 35.05,
     "cpc": 2.57,
     "cplpv": 4.97,
     "pct_budget_gasto": 78.4
@@ -32,9 +32,9 @@
     "full_days": 11,
     "leads_per_day": 120.7,
     "spend_per_day": 4503.96,
-    "need_per_day": 461.9,
+    "need_per_day": 452.7,
     "budget_per_day_needed": 1978.24,
-    "proj_total": 2212,
+    "proj_total": 2276,
     "proj_spend": 81680.01,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -141,11 +141,11 @@
     },
     {
       "day": "2026-06-15",
-      "leads": 39,
+      "leads": 103,
       "spend": 608.81,
       "spend_aristo": 495.07,
       "spend_medq": 113.74,
-      "cum_leads": 1367,
+      "cum_leads": 1431,
       "cum_spend": 50152.32
     }
   ],
@@ -874,43 +874,43 @@
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 653,
-      "pct": 47.8
+      "n": 688,
+      "pct": 48.1
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 535,
-      "pct": 39.1
+      "n": 557,
+      "pct": 38.9
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 74,
-      "pct": 5.4
+      "n": 75,
+      "pct": 5.2
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 45,
-      "pct": 3.3
+      "n": 48,
+      "pct": 3.4
     },
     {
       "label": "Médico(a) em preparação para prova de título",
-      "n": 15,
+      "n": 16,
       "pct": 1.1
     },
     {
       "label": "Médico(a) em transição de carreira",
-      "n": 14,
+      "n": 15,
       "pct": 1.0
     },
     {
       "label": "Outro",
-      "n": 9,
+      "n": 10,
       "pct": 0.7
     },
     {
       "label": "Ensino médio / pré-vestibular (interessado em Medicina)",
       "n": 9,
-      "pct": 0.7
+      "pct": 0.6
     },
     {
       "label": "Médico(a) especialista",
