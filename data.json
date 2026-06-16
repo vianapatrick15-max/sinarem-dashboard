@@ -14,16 +14,16 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1584,
-    "publico_n": 1439,
-    "pct_publico": 90.8,
+    "inscritos": 1617,
+    "publico_n": 1467,
+    "pct_publico": 90.7,
     "spend": 55531.14,
     "spend_aristo": 39639.95,
     "spend_medq": 15891.19,
     "impressions": 4134114,
     "clicks": 21728,
     "lpv": 10988,
-    "cpl_blended": 35.06,
+    "cpl_blended": 34.34,
     "cpc": 2.56,
     "cplpv": 5.05,
     "pct_budget_gasto": 86.8
@@ -32,9 +32,9 @@
     "full_days": 12,
     "leads_per_day": 130.5,
     "spend_per_day": 4591.92,
-    "need_per_day": 502.7,
+    "need_per_day": 497.2,
     "budget_per_day_needed": 1411.48,
-    "proj_total": 2367,
+    "proj_total": 2400,
     "proj_spend": 83082.65,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -150,11 +150,11 @@
     },
     {
       "day": "2026-06-16",
-      "leads": 18,
+      "leads": 51,
       "spend": 428.12,
       "spend_aristo": 322.09,
       "spend_medq": 106.03,
-      "cum_leads": 1584,
+      "cum_leads": 1617,
       "cum_spend": 55531.14
     }
   ],
@@ -939,23 +939,23 @@
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 773,
-      "pct": 48.8
+      "n": 786,
+      "pct": 48.6
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 611,
-      "pct": 38.6
+      "n": 622,
+      "pct": 38.5
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 75,
-      "pct": 4.7
+      "n": 77,
+      "pct": 4.8
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 55,
-      "pct": 3.5
+      "n": 59,
+      "pct": 3.6
     },
     {
       "label": "Médico(a) em transição de carreira",
@@ -964,17 +964,17 @@
     },
     {
       "label": "Médico(a) em preparação para prova de título",
-      "n": 16,
-      "pct": 1.0
+      "n": 17,
+      "pct": 1.1
     },
     {
       "label": "Outro",
-      "n": 11,
+      "n": 12,
       "pct": 0.7
     },
     {
       "label": "Médico(a) residente",
-      "n": 9,
+      "n": 10,
       "pct": 0.6
     },
     {
