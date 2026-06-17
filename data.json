@@ -14,8 +14,8 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1719,
-    "publico_n": 1565,
+    "inscritos": 1745,
+    "publico_n": 1588,
     "pct_publico": 91.0,
     "spend": 59409.04,
     "spend_aristo": 41745.46,
@@ -23,7 +23,7 @@
     "impressions": 4430758,
     "clicks": 23357,
     "lpv": 11554,
-    "cpl_blended": 34.56,
+    "cpl_blended": 34.05,
     "cpc": 2.54,
     "cplpv": 5.14,
     "pct_budget_gasto": 92.8
@@ -32,9 +32,9 @@
     "full_days": 13,
     "leads_per_day": 131.4,
     "spend_per_day": 4554.08,
-    "need_per_day": 576.2,
+    "need_per_day": 571.0,
     "budget_per_day_needed": 918.19,
-    "proj_total": 2376,
+    "proj_total": 2402,
     "proj_spend": 82179.42,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -159,11 +159,11 @@
     },
     {
       "day": "2026-06-17",
-      "leads": 11,
+      "leads": 37,
       "spend": 206.05,
       "spend_aristo": 88.09,
       "spend_medq": 117.96,
-      "cum_leads": 1719,
+      "cum_leads": 1745,
       "cum_spend": 59409.04
     }
   ],
@@ -1020,28 +1020,28 @@
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 845,
-      "pct": 49.2
+      "n": 861,
+      "pct": 49.3
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 660,
-      "pct": 38.4
+      "n": 666,
+      "pct": 38.2
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 78,
+      "n": 79,
       "pct": 4.5
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 60,
+      "n": 61,
       "pct": 3.5
     },
     {
       "label": "Médico(a) em transição de carreira",
-      "n": 18,
-      "pct": 1.0
+      "n": 19,
+      "pct": 1.1
     },
     {
       "label": "Médico(a) em preparação para prova de título",
@@ -1055,7 +1055,7 @@
     },
     {
       "label": "Médico(a) residente",
-      "n": 10,
+      "n": 11,
       "pct": 0.6
     },
     {
