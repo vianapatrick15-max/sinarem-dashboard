@@ -117,6 +117,11 @@ for d, v in list(aristo_day.items()) + list(medq_day.items()):
 h = sh.worksheet("DADOS_HUBSPOT_SiNAREM").get_all_values()
 hh = {x.strip(): i for i, x in enumerate(h[0])}
 H_DATA, H_PERFIL = hh["Data de conversão recente"], hh["Momento do Perfil"]
+# split pago x organico: regra literal -> qualquer UTM preenchida = PAGO; nenhuma = ORGANICO
+UTM_COLS = ["UTM Source", "UTM Medium", "UTM Content", "UTM Term",
+            "UTM Campaign", "UTM ID", "UTM AD ID", "UTM AD SET ID"]
+H_UTM = [hh[c] for c in UTM_COLS if c in hh]
+def has_utm(r): return any(len(r) > i and r[i].strip() for i in H_UTM)
 hrows = [r for r in h[1:] if any(c.strip() for c in r) and len(r) > H_DATA and r[H_DATA].strip()]
 
 def daykey(s):  # "05/06/2026 16:56:38" -> "2026-06-05"
@@ -127,11 +132,22 @@ def daykey(s):  # "05/06/2026 16:56:38" -> "2026-06-05"
 
 total_inscritos = len(hrows)
 leads_by_day = defaultdict(int)
+leads_pago_by_day = defaultdict(int)
+leads_org_by_day = defaultdict(int)
 perfil_count = defaultdict(int)
+inscritos_pago = inscritos_org = 0
 for r in hrows:
-    leads_by_day[daykey(r[H_DATA])] += 1
+    dk = daykey(r[H_DATA])
+    leads_by_day[dk] += 1
+    if has_utm(r):
+        inscritos_pago += 1
+        leads_pago_by_day[dk] += 1
+    else:
+        inscritos_org += 1
+        leads_org_by_day[dk] += 1
     p = r[H_PERFIL].strip() if len(r) > H_PERFIL else ""
     perfil_count[p or "Não informado"] += 1
+pct_pago = round(100 * inscritos_pago / total_inscritos, 1) if total_inscritos else 0
 
 publico_n = sum(n for p, n in perfil_count.items() if p in TARGET_PROFILES)
 pct_publico = round(100 * publico_n / total_inscritos, 1) if total_inscritos else 0
@@ -163,6 +179,8 @@ for d in all_days:
     series.append({
         "day": d,
         "leads": leads_by_day.get(d, 0),
+        "leads_pago": leads_pago_by_day.get(d, 0),
+        "leads_organico": leads_org_by_day.get(d, 0),
         "spend": round(spend_by_day.get(d, 0), 2),
         "spend_aristo": round(aristo_day.get(d, 0), 2),
         "spend_medq": round(medq_day.get(d, 0), 2),
@@ -207,6 +225,9 @@ data = {
     },
     "kpis": {
         "inscritos": total_inscritos,
+        "inscritos_pago": inscritos_pago,
+        "inscritos_organico": inscritos_org,
+        "pct_pago": pct_pago,
         "publico_n": publico_n,
         "pct_publico": pct_publico,
         "spend": round(spend, 2),
@@ -251,6 +272,7 @@ html = tpl.replace("__DATA__", json.dumps(data, ensure_ascii=False))
 
 # ---------- resumo no terminal ----------
 print(f"INSCRITOS: {total_inscritos} (meta {TOTAL_TARGET}) | publico certo: {publico_n} ({pct_publico}%)")
+print(f"ORIGEM: {inscritos_pago} pagos (com UTM, {pct_pago}%) | {inscritos_org} organicos (sem UTM, {round(100-pct_pago,1)}%)")
 print(f"SPEND: R$ {spend:,.2f} (Aristo {aristo['spend']:,.0f} + MedQ {medq['spend']:,.0f}) / R$ {BUDGET:,.0f} ({data['kpis']['pct_budget_gasto']}%)")
 print(f"CPL blended: R$ {cpl_blended:,.2f} (meta R$ {CPL_TARGET:.0f}) | CPC: R$ {data['kpis']['cpc']} | custo/LPV: R$ {data['kpis']['cplpv']}")
 print(f"PACE (dias cheios={n_full}): {leads_per_day_full:.1f} inscritos/dia | spend {spend_per_day_full:.0f}/dia")

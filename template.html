@@ -84,6 +84,19 @@
   .hbar .htrack i{display:block;height:100%;border-radius:7px;background:var(--accent)}
   .hbar.dim .htrack i{background:var(--accent2)}
   .hbar .hnum{flex:0 0 110px;text-align:right;font-size:12.5px;font-weight:700}
+  .origem{display:flex;flex-direction:column;gap:16px}
+  .os-bar{display:flex;height:28px;border-radius:8px;overflow:hidden;background:#eaeef2}
+  .os-bar i{display:block;height:100%;transition:width .2s}
+  .os-bar i.pago{background:var(--accent)}
+  .os-bar i.org{background:var(--good)}
+  .os-legend{display:flex;gap:34px;flex-wrap:wrap}
+  .os-item{display:flex;align-items:flex-start;gap:10px}
+  .os-item .sw{width:12px;height:12px;border-radius:3px;flex:0 0 auto;margin-top:7px}
+  .os-item .sw.pago{background:var(--accent)}
+  .os-item .sw.org{background:var(--good)}
+  .os-item .big{font-size:26px;font-weight:800;color:var(--ink);line-height:1}
+  .os-item .lab{font-size:13px;font-weight:700;color:var(--ink)}
+  .os-item .sub{font-size:12px;color:var(--muted)}
   table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
   th,td{padding:11px 14px;text-align:right;font-size:13.5px;border-bottom:1px solid var(--line)}
   th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
@@ -148,6 +161,9 @@
 
   <div class="seclab">Como estamos vs a meta <small id="lab-kpis"></small></div>
   <div class="grid" id="kpis"></div>
+
+  <div class="seclab">Inscritos por origem <small>(com UTM = pago · sem UTM = orgânico)</small> <small id="lab-origem"></small></div>
+  <div class="panel" id="origem"></div>
 
   <div class="seclab">Ritmo e projeção até o fim da captação (21/06) <small id="lab-pace"></small></div>
   <div class="pace">
@@ -290,6 +306,7 @@ document.getElementById("perfil").innerHTML = DATA.perfil.slice(0,8).map((x,i)=>
     <h4>Onde estamos</h4>
     <ul>
       <li>Em ${p0.full_days} dias de captação temos <b>${NUM(k0.inscritos)} inscritos</b> (${Math.round(100*k0.inscritos/t.total)}% da meta de ${NUM(t.total)}), com <b>${k0.pct_publico}% do público certo</b> — gente em preparação para residência.</li>
+      <li>Por origem: <b>${NUM(k0.inscritos_pago)} pagos</b> (${k0.pct_pago}% — entraram com UTM/links rastreados) e <b>${NUM(k0.inscritos_organico)} orgânicos</b> (${Math.round(1000-k0.pct_pago*10)/10}% — sem UTM).</li>
       <li>Já investimos <b>${BRL(k0.spend)}</b> (${k0.pct_budget_gasto}% da verba): ${BRL(k0.spend_aristo)} pela frente Aristo e ${BRL(k0.spend_medq)} pela MedQ. O custo por inscrito está em <b>${BRL2(k0.cpl_blended)}</b> (referência ${BRL(t.cpl)}).</li>
     </ul>
   </div>`);
@@ -432,8 +449,43 @@ function render(){
    +rate("Projeção de gasto até 21/06", BRL(projSp), projSp>=t.budget*0.9?"good":"bad")
    +rate("Sobraria sem uso", BRL(Math.max(0,t.budget-projSp)), Math.max(0,t.budget-projSp)>t.budget*0.15?"bad":"good");
 
+  renderOrigem(days);
   renderDaily(days);
   renderTable(adsP);
+}
+
+// inscritos pago (com UTM) x organico (sem UTM) — respeita o período selecionado
+function renderOrigem(days){
+  const pago = days.reduce((a,d)=>a+(d.leads_pago||0),0);
+  const org  = days.reduce((a,d)=>a+(d.leads_organico||0),0);
+  const tot  = pago+org;
+  const pp = tot? Math.round(100*pago/tot) : 0, po = tot? 100-pp : 0;
+  document.getElementById("lab-origem").textContent =
+    isFullPeriod()? "" : `(${fmtDay(state.from)} a ${fmtDay(state.to)})`;
+  document.getElementById("origem").innerHTML = `
+    <div class="origem">
+      <div class="os-bar">
+        <i class="pago" style="width:${pp}%"></i>
+        <i class="org" style="width:${po}%"></i>
+      </div>
+      <div class="os-legend">
+        <div class="os-item"><span class="sw pago"></span><div>
+          <div class="big">${NUM(pago)} <span style="font-size:14px;font-weight:700;color:var(--muted)">· ${pp}%</span></div>
+          <div class="lab">Pagos</div>
+          <div class="sub">vieram com UTM (mídia / links rastreados)</div>
+        </div></div>
+        <div class="os-item"><span class="sw org"></span><div>
+          <div class="big">${NUM(org)} <span style="font-size:14px;font-weight:700;color:var(--muted)">· ${po}%</span></div>
+          <div class="lab">Orgânicos</div>
+          <div class="sub">sem nenhuma UTM (entrada direta / orgânica)</div>
+        </div></div>
+        <div class="os-item"><span class="sw" style="background:var(--navy)"></span><div>
+          <div class="big">${NUM(tot)}</div>
+          <div class="lab">Total no período</div>
+          <div class="sub">inscritos somados</div>
+        </div></div>
+      </div>
+    </div>`;
 }
 
 function renderDaily(days){

@@ -14,16 +14,19 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1973,
-    "publico_n": 1799,
-    "pct_publico": 91.2,
+    "inscritos": 1978,
+    "inscritos_pago": 1231,
+    "inscritos_organico": 747,
+    "pct_pago": 62.2,
+    "publico_n": 1801,
+    "pct_publico": 91.1,
     "spend": 63320.99,
     "spend_aristo": 43780.57,
     "spend_medq": 19540.42,
     "impressions": 4725954,
     "clicks": 24296,
     "lpv": 11984,
-    "cpl_blended": 32.09,
+    "cpl_blended": 32.01,
     "cpc": 2.61,
     "cplpv": 5.28,
     "pct_budget_gasto": 98.9
@@ -32,9 +35,9 @@
     "full_days": 15,
     "leads_per_day": 130.6,
     "spend_per_day": 4221.4,
-    "need_per_day": 875.7,
+    "need_per_day": 874.0,
     "budget_per_day_needed": 226.34,
-    "proj_total": 2365,
+    "proj_total": 2370,
     "proj_spend": 75985.19,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -43,6 +46,8 @@
     {
       "day": "2026-06-04",
       "leads": 4,
+      "leads_pago": 4,
+      "leads_organico": 0,
       "spend": 0.0,
       "spend_aristo": 0,
       "spend_medq": 0,
@@ -52,6 +57,8 @@
     {
       "day": "2026-06-05",
       "leads": 102,
+      "leads_pago": 57,
+      "leads_organico": 45,
       "spend": 1688.68,
       "spend_aristo": 1329.81,
       "spend_medq": 358.87,
@@ -61,6 +68,8 @@
     {
       "day": "2026-06-06",
       "leads": 127,
+      "leads_pago": 63,
+      "leads_organico": 64,
       "spend": 3581.16,
       "spend_aristo": 2630.06,
       "spend_medq": 951.1,
@@ -70,6 +79,8 @@
     {
       "day": "2026-06-07",
       "leads": 121,
+      "leads_pago": 47,
+      "leads_organico": 74,
       "spend": 3303.04,
       "spend_aristo": 2527.83,
       "spend_medq": 775.21,
@@ -79,6 +90,8 @@
     {
       "day": "2026-06-08",
       "leads": 89,
+      "leads_pago": 55,
+      "leads_organico": 34,
       "spend": 2348.39,
       "spend_aristo": 1381.67,
       "spend_medq": 966.72,
@@ -88,6 +101,8 @@
     {
       "day": "2026-06-09",
       "leads": 150,
+      "leads_pago": 97,
+      "leads_organico": 53,
       "spend": 2490.7,
       "spend_aristo": 1746.24,
       "spend_medq": 744.46,
@@ -97,6 +112,8 @@
     {
       "day": "2026-06-10",
       "leads": 172,
+      "leads_pago": 109,
+      "leads_organico": 63,
       "spend": 7209.22,
       "spend_aristo": 5459.22,
       "spend_medq": 1750.0,
@@ -106,6 +123,8 @@
     {
       "day": "2026-06-11",
       "leads": 207,
+      "leads_pago": 143,
+      "leads_organico": 64,
       "spend": 9450.01,
       "spend_aristo": 6767.53,
       "spend_medq": 2682.48,
@@ -115,6 +134,8 @@
     {
       "day": "2026-06-12",
       "leads": 137,
+      "leads_pago": 107,
+      "leads_organico": 30,
       "spend": 9421.19,
       "spend_aristo": 6755.43,
       "spend_medq": 2665.76,
@@ -124,6 +145,8 @@
     {
       "day": "2026-06-13",
       "leads": 109,
+      "leads_pago": 63,
+      "leads_organico": 46,
       "spend": 4894.46,
       "spend_aristo": 3423.63,
       "spend_medq": 1470.83,
@@ -133,6 +156,8 @@
     {
       "day": "2026-06-14",
       "leads": 110,
+      "leads_pago": 73,
+      "leads_organico": 37,
       "spend": 5158.64,
       "spend_aristo": 3618.57,
       "spend_medq": 1540.07,
@@ -142,6 +167,8 @@
     {
       "day": "2026-06-15",
       "leads": 238,
+      "leads_pago": 160,
+      "leads_organico": 78,
       "spend": 5559.41,
       "spend_aristo": 3679.61,
       "spend_medq": 1879.8,
@@ -151,6 +178,8 @@
     {
       "day": "2026-06-16",
       "leads": 142,
+      "leads_pago": 90,
+      "leads_organico": 52,
       "spend": 4099.1,
       "spend_aristo": 2338.53,
       "spend_medq": 1760.57,
@@ -160,6 +189,8 @@
     {
       "day": "2026-06-17",
       "leads": 118,
+      "leads_pago": 80,
+      "leads_organico": 38,
       "spend": 2864.03,
       "spend_aristo": 1726.99,
       "spend_medq": 1137.04,
@@ -169,6 +200,8 @@
     {
       "day": "2026-06-18",
       "leads": 133,
+      "leads_pago": 78,
+      "leads_organico": 55,
       "spend": 1252.96,
       "spend_aristo": 395.45,
       "spend_medq": 857.51,
@@ -177,11 +210,13 @@
     },
     {
       "day": "2026-06-19",
-      "leads": 14,
+      "leads": 19,
+      "leads_pago": 5,
+      "leads_organico": 14,
       "spend": 0.0,
       "spend_aristo": 0,
       "spend_medq": 0.0,
-      "cum_leads": 1973,
+      "cum_leads": 1978,
       "cum_spend": 63320.99
     }
   ],
@@ -1111,16 +1146,16 @@
     {
       "label": "Médico(a) em preparação para residência",
       "n": 976,
-      "pct": 49.5
+      "pct": 49.3
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 750,
+      "n": 752,
       "pct": 38.0
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 86,
+      "n": 88,
       "pct": 4.4
     },
     {
@@ -1150,8 +1185,8 @@
     },
     {
       "label": "Ensino médio / pré-vestibular (interessado em Medicina)",
-      "n": 10,
-      "pct": 0.5
+      "n": 11,
+      "pct": 0.6
     },
     {
       "label": "Médico(a) especialista",
