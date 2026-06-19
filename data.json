@@ -14,11 +14,11 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1978,
-    "inscritos_pago": 1231,
+    "inscritos": 1979,
+    "inscritos_pago": 1232,
     "inscritos_organico": 747,
-    "pct_pago": 62.2,
-    "publico_n": 1801,
+    "pct_pago": 62.3,
+    "publico_n": 1802,
     "pct_publico": 91.1,
     "spend": 63320.99,
     "spend_aristo": 43780.57,
@@ -26,7 +26,7 @@
     "impressions": 4725954,
     "clicks": 24296,
     "lpv": 11984,
-    "cpl_blended": 32.01,
+    "cpl_blended": 32.0,
     "cpc": 2.61,
     "cplpv": 5.28,
     "pct_budget_gasto": 98.9
@@ -35,9 +35,9 @@
     "full_days": 15,
     "leads_per_day": 130.6,
     "spend_per_day": 4221.4,
-    "need_per_day": 874.0,
+    "need_per_day": 873.7,
     "budget_per_day_needed": 226.34,
-    "proj_total": 2370,
+    "proj_total": 2371,
     "proj_spend": 75985.19,
     "on_track_leads": false,
     "on_track_cpl": false
@@ -210,13 +210,13 @@
     },
     {
       "day": "2026-06-19",
-      "leads": 19,
-      "leads_pago": 5,
+      "leads": 20,
+      "leads_pago": 6,
       "leads_organico": 14,
       "spend": 0.0,
       "spend_aristo": 0,
       "spend_medq": 0.0,
-      "cum_leads": 1978,
+      "cum_leads": 1979,
       "cum_spend": 63320.99
     }
   ],
@@ -1150,7 +1150,7 @@
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 752,
+      "n": 753,
       "pct": 38.0
     },
     {
