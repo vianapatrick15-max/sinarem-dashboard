@@ -101,6 +101,14 @@
   .orow .oval .p.pago{background:#e8f1fc;color:var(--accent)}
   .orow .oval .p.org{background:var(--good-bg);color:var(--good)}
   @media(max-width:560px){.origem{justify-content:center}.origem .donut{margin:0 auto}}
+  .ocpl{display:flex;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .ocpl .ci{flex:1;min-width:140px;background:#f7f9fb;border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .ocpl .ci .cl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .ocpl .ci .cv{font-size:22px;font-weight:800;color:var(--ink);margin-top:4px;letter-spacing:-.01em}
+  .ocpl .ci .cv small{font-size:12px;font-weight:600;color:var(--muted)}
+  .ocpl .ci.hl{background:#e8f1fc;border-color:#cfe2f7}
+  .ocpl .ci.hl .cv{color:var(--accent)}
+  .ofoot{font-size:11.5px;color:var(--muted);margin-top:11px;line-height:1.5}
   table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
   th,td{padding:11px 14px;text-align:right;font-size:13.5px;border-bottom:1px solid var(--line)}
   th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
@@ -464,6 +472,10 @@ function renderOrigem(days){
   const org  = days.reduce((a,d)=>a+(d.leads_organico||0),0);
   const tot  = pago+org;
   const pp = tot? Math.round(100*pago/tot) : 0, po = tot? 100-pp : 0;
+  // CPL: toda a verba (2 frentes) e midia -> custo dos leads PAGOS (rastreados); organico = sem custo de midia
+  const spendTot = days.reduce((a,d)=>a+d.spend,0);
+  const cplPago = pago? spendTot/pago : 0;
+  const cplBlended = tot? spendTot/tot : 0;
   document.getElementById("lab-origem").textContent =
     isFullPeriod()? "" : `(${fmtDay(state.from)} a ${fmtDay(state.to)})`;
 
@@ -496,7 +508,13 @@ function renderOrigem(days){
           <div class="oval"><div class="n">${NUM(org)}</div><div class="p org">${po}%</div></div>
         </div>
       </div>
-    </div>`;
+    </div>
+    <div class="ocpl">
+      <div class="ci hl"><div class="cl">CPL pago</div><div class="cv">${BRL2(cplPago)}</div></div>
+      <div class="ci"><div class="cl">CPL orgânico</div><div class="cv">R$ 0,00 <small>sem mídia</small></div></div>
+      <div class="ci"><div class="cl">CPL geral (blended)</div><div class="cv">${BRL2(cplBlended)} <small>ref. ${BRL(t.cpl)}</small></div></div>
+    </div>
+    <div class="ofoot">CPL pago = verba total das duas frentes (${BRL(spendTot)}) ÷ inscritos com UTM. Orgânicos não têm custo de mídia. O blended divide a verba por todos os inscritos.</div>`;
 }
 
 function renderDaily(days){
