@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-06-19T12:00:00",
-  "today": "2026-06-19",
+  "updated_at": "2026-06-20T12:00:00",
+  "today": "2026-06-20",
   "event_start": "2026-06-19",
   "capture_end": "2026-06-21",
   "campaign_start": "2026-06-04",
-  "days_left": 2,
+  "days_left": 1,
   "days_to_event": 0,
   "targets": {
     "cpl": 20.0,
@@ -14,31 +14,31 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 1981,
-    "inscritos_pago": 1232,
-    "inscritos_organico": 749,
-    "pct_pago": 62.2,
-    "publico_n": 1804,
-    "pct_publico": 91.1,
-    "spend": 63320.99,
+    "inscritos": 2023,
+    "inscritos_pago": 1256,
+    "inscritos_organico": 767,
+    "pct_pago": 62.1,
+    "publico_n": 1841,
+    "pct_publico": 91.0,
+    "spend": 63321.0,
     "spend_aristo": 43780.57,
-    "spend_medq": 19540.42,
-    "impressions": 4725954,
+    "spend_medq": 19540.43,
+    "impressions": 4725957,
     "clicks": 24296,
     "lpv": 11984,
-    "cpl_blended": 31.96,
+    "cpl_blended": 31.3,
     "cpc": 2.61,
     "cplpv": 5.28,
     "pct_budget_gasto": 98.9
   },
   "pace": {
-    "full_days": 15,
-    "leads_per_day": 130.6,
-    "spend_per_day": 4221.4,
-    "need_per_day": 873.0,
-    "budget_per_day_needed": 226.34,
-    "proj_total": 2373,
-    "proj_spend": 75985.19,
+    "full_days": 16,
+    "leads_per_day": 126.4,
+    "spend_per_day": 3957.56,
+    "need_per_day": 1288.5,
+    "budget_per_day_needed": 339.5,
+    "proj_total": 2276,
+    "proj_spend": 71236.12,
     "on_track_leads": false,
     "on_track_cpl": false
   },
@@ -202,22 +202,33 @@
       "leads": 133,
       "leads_pago": 78,
       "leads_organico": 55,
-      "spend": 1252.96,
+      "spend": 1252.97,
       "spend_aristo": 395.45,
-      "spend_medq": 857.51,
+      "spend_medq": 857.52,
       "cum_leads": 1959,
-      "cum_spend": 63320.99
+      "cum_spend": 63321.0
     },
     {
       "day": "2026-06-19",
-      "leads": 22,
-      "leads_pago": 6,
-      "leads_organico": 16,
+      "leads": 63,
+      "leads_pago": 29,
+      "leads_organico": 34,
       "spend": 0.0,
       "spend_aristo": 0,
       "spend_medq": 0.0,
-      "cum_leads": 1981,
-      "cum_spend": 63320.99
+      "cum_leads": 2022,
+      "cum_spend": 63321.0
+    },
+    {
+      "day": "2026-06-20",
+      "leads": 1,
+      "leads_pago": 1,
+      "leads_organico": 0,
+      "spend": 0,
+      "spend_aristo": 0,
+      "spend_medq": 0,
+      "cum_leads": 2023,
+      "cum_spend": 63321.0
     }
   ],
   "fronts": [
@@ -230,8 +241,8 @@
     },
     {
       "front": "MedQ",
-      "spend": 19540.42,
-      "impressions": 2086250.0,
+      "spend": 19540.43,
+      "impressions": 2086253.0,
       "clicks": 5968.0,
       "lpv": 2927.0
     }
@@ -1073,7 +1084,7 @@
       "day": "2026-06-18",
       "front": "MedQ",
       "ad": "ad02_img_coloqueaprova",
-      "spend": 662.63,
+      "spend": 662.64,
       "clicks": 200,
       "lpv": 90
     },
@@ -1120,7 +1131,15 @@
     {
       "day": "2026-06-19",
       "front": "MedQ",
-      "ad": "ad03_car_datamarcada",
+      "ad": "ad01_img_oficial2026",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-19",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
       "spend": 0.0,
       "clicks": 0,
       "lpv": 0
@@ -1136,7 +1155,7 @@
     {
       "day": "2026-06-19",
       "front": "MedQ",
-      "ad": "ad02_img_coloqueaprova",
+      "ad": "ad03_car_datamarcada",
       "spend": 0.0,
       "clicks": 0,
       "lpv": 0
@@ -1145,58 +1164,58 @@
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 978,
-      "pct": 49.4
+      "n": 987,
+      "pct": 48.8
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 753,
-      "pct": 38.0
+      "n": 780,
+      "pct": 38.6
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 88,
+      "n": 89,
       "pct": 4.4
     },
     {
       "label": "Médico(a) recém-formado(a)",
-      "n": 73,
+      "n": 74,
       "pct": 3.7
     },
     {
       "label": "Médico(a) em preparação para prova de título",
-      "n": 24,
+      "n": 25,
       "pct": 1.2
     },
     {
       "label": "Médico(a) em transição de carreira",
       "n": 21,
-      "pct": 1.1
+      "pct": 1.0
+    },
+    {
+      "label": "Médico(a) residente",
+      "n": 14,
+      "pct": 0.7
     },
     {
       "label": "Outro",
       "n": 13,
-      "pct": 0.7
-    },
-    {
-      "label": "Médico(a) residente",
-      "n": 12,
       "pct": 0.6
     },
     {
       "label": "Ensino médio / pré-vestibular (interessado em Medicina)",
-      "n": 11,
+      "n": 12,
       "pct": 0.6
     },
     {
       "label": "Médico(a) especialista",
       "n": 7,
-      "pct": 0.4
+      "pct": 0.3
     },
     {
       "label": "Não informado",
       "n": 1,
-      "pct": 0.1
+      "pct": 0.0
     }
   ]
 }
