@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-22T12:00:00",
-  "today": "2026-06-22",
+  "updated_at": "2026-06-23T12:00:00",
+  "today": "2026-06-23",
   "event_start": "2026-06-19",
   "capture_end": "2026-06-21",
   "campaign_start": "2026-06-04",
@@ -14,11 +14,11 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 2122,
-    "inscritos_pago": 1302,
-    "inscritos_organico": 820,
-    "pct_pago": 61.4,
-    "publico_n": 1939,
+    "inscritos": 2124,
+    "inscritos_pago": 1303,
+    "inscritos_organico": 821,
+    "pct_pago": 61.3,
+    "publico_n": 1941,
     "pct_publico": 91.4,
     "spend": 63321.0,
     "spend_aristo": 43780.57,
@@ -26,19 +26,19 @@
     "impressions": 4725957,
     "clicks": 24296,
     "lpv": 11984,
-    "cpl_blended": 29.84,
+    "cpl_blended": 29.81,
     "cpc": 2.61,
     "cplpv": 5.28,
     "pct_budget_gasto": 98.9
   },
   "pace": {
-    "full_days": 18,
-    "leads_per_day": 117.8,
-    "spend_per_day": 3517.83,
-    "need_per_day": 2478.0,
+    "full_days": 19,
+    "leads_per_day": 111.8,
+    "spend_per_day": 3332.68,
+    "need_per_day": 2476.0,
     "budget_per_day_needed": 679.0,
-    "proj_total": 2240,
-    "proj_spend": 66838.83,
+    "proj_total": 2236,
+    "proj_spend": 66653.68,
     "on_track_leads": false,
     "on_track_cpl": false
   },
@@ -243,13 +243,13 @@
     },
     {
       "day": "2026-06-22",
-      "leads": 1,
-      "leads_pago": 1,
-      "leads_organico": 0,
-      "spend": 0,
+      "leads": 3,
+      "leads_pago": 2,
+      "leads_organico": 1,
+      "spend": 0.0,
       "spend_aristo": 0,
-      "spend_medq": 0,
-      "cum_leads": 2122,
+      "spend_medq": 0.0,
+      "cum_leads": 2124,
       "cum_spend": 63321.0
     }
   ],
@@ -1245,17 +1245,49 @@
       "spend": 0.0,
       "clicks": 0,
       "lpv": 0
+    },
+    {
+      "day": "2026-06-22",
+      "front": "MedQ",
+      "ad": "ad01_img_oficial2026",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-22",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-22",
+      "front": "MedQ",
+      "ad": "ad03_car_datamarcada",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-22",
+      "front": "MedQ",
+      "ad": "ad04_car_porqueparticipar",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
     }
   ],
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 1033,
+      "n": 1034,
       "pct": 48.7
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 831,
+      "n": 832,
       "pct": 39.2
     },
     {
