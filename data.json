@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-29T12:00:00",
-  "today": "2026-06-29",
+  "updated_at": "2026-06-30T12:00:00",
+  "today": "2026-06-30",
   "event_start": "2026-06-19",
   "capture_end": "2026-06-21",
   "campaign_start": "2026-06-04",
@@ -14,31 +14,31 @@
     "total": 4600
   },
   "kpis": {
-    "inscritos": 2216,
-    "inscritos_pago": 1377,
-    "inscritos_organico": 839,
-    "pct_pago": 62.1,
-    "publico_n": 2021,
-    "pct_publico": 91.2,
-    "spend": 65460.02,
-    "spend_aristo": 44235.36,
-    "spend_medq": 21224.66,
-    "impressions": 4841328,
-    "clicks": 24856,
-    "lpv": 12264,
-    "cpl_blended": 29.54,
-    "cpc": 2.63,
+    "inscritos": 2234,
+    "inscritos_pago": 1394,
+    "inscritos_organico": 840,
+    "pct_pago": 62.4,
+    "publico_n": 2036,
+    "pct_publico": 91.1,
+    "spend": 65698.12,
+    "spend_aristo": 44344.45,
+    "spend_medq": 21353.67,
+    "impressions": 4853479,
+    "clicks": 24917,
+    "lpv": 12296,
+    "cpl_blended": 29.41,
+    "cpc": 2.64,
     "cplpv": 5.34,
-    "pct_budget_gasto": 102.3
+    "pct_budget_gasto": 102.7
   },
   "pace": {
-    "full_days": 25,
-    "leads_per_day": 88.3,
-    "spend_per_day": 2617.29,
-    "need_per_day": 2384.0,
-    "budget_per_day_needed": -1460.02,
-    "proj_total": 2304,
-    "proj_spend": 68077.31,
+    "full_days": 26,
+    "leads_per_day": 85.6,
+    "spend_per_day": 2525.66,
+    "need_per_day": 2366.0,
+    "budget_per_day_needed": -1698.12,
+    "proj_total": 2320,
+    "proj_spend": 68223.78,
     "on_track_leads": false,
     "on_track_cpl": false
   },
@@ -312,38 +312,49 @@
       "leads": 13,
       "leads_pago": 10,
       "leads_organico": 3,
-      "spend": 210.17,
-      "spend_aristo": 103.4,
+      "spend": 210.19,
+      "spend_aristo": 103.42,
       "spend_medq": 106.77,
       "cum_leads": 2207,
-      "cum_spend": 65432.32
+      "cum_spend": 65432.34
     },
     {
       "day": "2026-06-29",
-      "leads": 9,
-      "leads_pago": 7,
-      "leads_organico": 2,
-      "spend": 27.7,
-      "spend_aristo": 9.01,
-      "spend_medq": 18.69,
-      "cum_leads": 2216,
-      "cum_spend": 65460.02
+      "leads": 19,
+      "leads_pago": 16,
+      "leads_organico": 3,
+      "spend": 234.89,
+      "spend_aristo": 109.31,
+      "spend_medq": 125.58,
+      "cum_leads": 2226,
+      "cum_spend": 65667.23
+    },
+    {
+      "day": "2026-06-30",
+      "leads": 8,
+      "leads_pago": 8,
+      "leads_organico": 0,
+      "spend": 30.89,
+      "spend_aristo": 8.77,
+      "spend_medq": 22.12,
+      "cum_leads": 2234,
+      "cum_spend": 65698.12
     }
   ],
   "fronts": [
     {
       "front": "Aristo",
-      "spend": 44235.36,
-      "impressions": 2660242.0,
-      "clicks": 18446.0,
-      "lpv": 9151.0
+      "spend": 44344.45,
+      "impressions": 2665712.0,
+      "clicks": 18480.0,
+      "lpv": 9170.0
     },
     {
       "front": "MedQ",
-      "spend": 21224.66,
-      "impressions": 2181086.0,
-      "clicks": 6410.0,
-      "lpv": 3113.0
+      "spend": 21353.67,
+      "impressions": 2187767.0,
+      "clicks": 6437.0,
+      "lpv": 3126.0
     }
   ],
   "ads_daily": [
@@ -1783,7 +1794,7 @@
       "day": "2026-06-28",
       "front": "Aristo",
       "ad": "ad04_img_sinarem_coloqueaprova",
-      "spend": 60.7,
+      "spend": 60.71,
       "clicks": 11,
       "lpv": 7
     },
@@ -1799,7 +1810,7 @@
       "day": "2026-06-28",
       "front": "Aristo",
       "ad": "ad03_img_sinarem_oficial2026",
-      "spend": 40.79,
+      "spend": 40.8,
       "clicks": 14,
       "lpv": 8
     },
@@ -1879,17 +1890,41 @@
       "day": "2026-06-29",
       "front": "MedQ",
       "ad": "ad04_img_sinarem_datas",
-      "spend": 13.75,
-      "clicks": 4,
-      "lpv": 4
+      "spend": 92.76,
+      "clicks": 15,
+      "lpv": 8
     },
     {
       "day": "2026-06-29",
       "front": "Aristo",
       "ad": "ad03_img_sinarem_oficial2026",
-      "spend": 4.69,
-      "clicks": 1,
+      "spend": 59.08,
+      "clicks": 21,
+      "lpv": 11
+    },
+    {
+      "day": "2026-06-29",
+      "front": "Aristo",
+      "ad": "ad04_img_sinarem_coloqueaprova",
+      "spend": 47.01,
+      "clicks": 11,
+      "lpv": 8
+    },
+    {
+      "day": "2026-06-29",
+      "front": "MedQ",
+      "ad": "ad05_carr_sinarem_datas",
+      "spend": 18.77,
+      "clicks": 3,
       "lpv": 1
+    },
+    {
+      "day": "2026-06-29",
+      "front": "MedQ",
+      "ad": "ad02_vid_sinarem_ugc_aline_v2",
+      "spend": 10.47,
+      "clicks": 1,
+      "lpv": 0
     },
     {
       "day": "2026-06-29",
@@ -1902,16 +1937,8 @@
     {
       "day": "2026-06-29",
       "front": "Aristo",
-      "ad": "ad04_img_sinarem_coloqueaprova",
-      "spend": 3.55,
-      "clicks": 0,
-      "lpv": 0
-    },
-    {
-      "day": "2026-06-29",
-      "front": "MedQ",
-      "ad": "ad05_carr_sinarem_datas",
-      "spend": 1.36,
+      "ad": "ad01_vid_sinarem_ugc_aline_v1",
+      "spend": 1.88,
       "clicks": 0,
       "lpv": 0
     },
@@ -1919,15 +1946,15 @@
       "day": "2026-06-29",
       "front": "Aristo",
       "ad": "ad02_vid_sinarem_ugc_aline_v2",
-      "spend": 0.4,
+      "spend": 0.89,
       "clicks": 1,
       "lpv": 1
     },
     {
       "day": "2026-06-29",
       "front": "Aristo",
-      "ad": "ad01_vid_sinarem_ugc_aline_v1",
-      "spend": 0.28,
+      "ad": "ad06_car_sinarem_porqueparticipar",
+      "spend": 0.25,
       "clicks": 0,
       "lpv": 0
     },
@@ -1935,26 +1962,74 @@
       "day": "2026-06-29",
       "front": "Aristo",
       "ad": "ad05_car_sinarem_datamarcada",
-      "spend": 0.09,
+      "spend": 0.2,
       "clicks": 0,
       "lpv": 0
+    },
+    {
+      "day": "2026-06-29",
+      "front": "MedQ",
+      "ad": "ad02_img_coloqueaprova",
+      "spend": 0.0,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-30",
+      "front": "MedQ",
+      "ad": "ad02_vid_sinarem_ugc_aline_v2",
+      "spend": 16.71,
+      "clicks": 9,
+      "lpv": 7
+    },
+    {
+      "day": "2026-06-30",
+      "front": "Aristo",
+      "ad": "ad03_img_sinarem_oficial2026",
+      "spend": 6.38,
+      "clicks": 3,
+      "lpv": 1
+    },
+    {
+      "day": "2026-06-30",
+      "front": "MedQ",
+      "ad": "ad04_img_sinarem_datas",
+      "spend": 3.59,
+      "clicks": 2,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-30",
+      "front": "Aristo",
+      "ad": "ad04_img_sinarem_coloqueaprova",
+      "spend": 2.39,
+      "clicks": 0,
+      "lpv": 0
+    },
+    {
+      "day": "2026-06-30",
+      "front": "MedQ",
+      "ad": "ad05_carr_sinarem_datas",
+      "spend": 1.82,
+      "clicks": 1,
+      "lpv": 1
     }
   ],
   "perfil": [
     {
       "label": "Médico(a) em preparação para residência",
-      "n": 1074,
+      "n": 1083,
       "pct": 48.5
     },
     {
       "label": "Estudante de Medicina (internato)",
-      "n": 864,
-      "pct": 39.0
+      "n": 870,
+      "pct": 38.9
     },
     {
       "label": "Estudante de Medicina (1º ao 4º ano)",
-      "n": 96,
-      "pct": 4.3
+      "n": 99,
+      "pct": 4.4
     },
     {
       "label": "Médico(a) recém-formado(a)",
